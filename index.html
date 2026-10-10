@@ -1,0 +1,3975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOB coMboS calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:'Arimo',sans-serif;
+}
+
+:root{
+    --text:#000;
+    --card:#fff;
+    --input:#fff;
+    --table:#fff;
+    --border:#ddd;
+}
+
+body{
+    margin:0;
+    text-align:center;
+    color:var(--text);
+    background:
+        radial-gradient(circle at top left,#fff,transparent 40%),
+        radial-gradient(circle at bottom right,#dfefff,transparent 35%),
+        linear-gradient(180deg,#f7fbff,#edf4fb);
+}
+
+body.dark{
+    --text:#f2f2f2;
+    --card:#242424;
+    --input:#2f2f2f;
+    --table:#202020;
+    --border:#555;
+    background:#151515;
+}
+
+.container{
+    margin-top:20px;
+}
+
+.top-buttons{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 12px 0;
+}
+
+.switch-btn{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:6px;
+    color:#fff;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:bold;
+    box-shadow:4px 4px 0 #0b3a82,6px 8px 14px #0003;
+}
+
+.reverse-btn{
+    background:linear-gradient(135deg,#00c853,#009624);
+    box-shadow:3px 3px 0 #00701a,5px 6px 10px #0003;
+}
+
+.report-btn{
+    background:linear-gradient(135deg,#8e24aa,#5e35b1);
+    box-shadow:3px 3px 0 #4527a0,5px 6px 10px #0003;
+}
+
+.userLoginBox{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin:12px auto;
+}
+
+.hiText{
+    font-size:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#usernameInput{
+    width:100px;
+    margin:0;
+    padding:7px 10px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+#loadBtn{
+    margin:0 0 0 4px;
+    padding:5px 10px;
+    color:#fff;
+    font-size:12px;
+    border-radius:100px;
+    background:linear-gradient(135deg,#1976d2,#0d47a1);
+    box-shadow:4px 4px 0 #0b3a82,6px 8px 14px #0003;
+}
+
+input,
+select{
+    width:90%;
+    max-width:340px;
+    margin:8px;
+    padding:12px;
+    padding-right:35px;
+    border:0;
+    border-radius:14px;
+    font-size:16px;
+    background:var(--input);
+    color:var(--text);
+    box-shadow:inset 2px 2px 5px #00000014,4px 4px 10px #0000001f;
+}
+
+select{
+    appearance:none;
+    -webkit-appearance:none;
+    text-align:left;
+    text-align-last:left;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath d='M1 3l5 5 5-5' fill='none' stroke='%23000000' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+}
+
+#combo,
+#editCombo{
+    font-variant-numeric:tabular-nums;
+}
+
+button{
+    margin:6px;
+    padding:12px 18px;
+    border:0;
+    border-radius:28px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:bold;
+    background:linear-gradient(to bottom,#fff,#e8e8e8);
+    box-shadow:4px 4px 0 #bdbdbd,6px 8px 14px #0003;
+    transition:all .15s ease;
+}
+
+button:hover{
+    transform:translate(-1px,-1px);
+    box-shadow:5px 5px 0 #bdbdbd,8px 10px 16px #0004;
+}
+
+button:active{
+    transform:translateY(3px);
+}
+
+body.dark button:not(.saveBtn):not(.cancelBtn){
+    color:#fff;
+    background:linear-gradient(#444,#2c2c2c);
+    box-shadow:4px 4px 0 #111,6px 8px 14px #0007;
+}
+
+.box{
+    max-width:340px;
+    margin:auto;
+    padding:15px;
+    border-radius:18px;
+    background:var(--card);
+    box-shadow:8px 8px 20px #0002;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    font-size:18px;
+}
+
+.highlight-total{
+    display:inline-block;
+    padding:4px 10px;
+    border:3px solid #ffd700;
+    border-radius:10px;
+    background:#fff8dc;
+    color:#000;
+    animation:goldGlow 1.5s infinite alternate;
+}
+
+body.dark .highlight-total{
+    background:#302b00;
+    color:#fff;
+}
+
+@keyframes goldGlow{
+    from{box-shadow:0 0 5px #ffd700,0 0 10px #ffd700}
+    to{box-shadow:0 0 15px #ffea00,0 0 25px #ffb300,0 0 35px #ff6f00}
+}
+
+.sobField{
+    display:flex;
+    align-items:center;
+    width:90%;
+    max-width:340px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:14px;
+    background:var(--input);
+    box-shadow:inset 2px 2px 5px #00000014,4px 4px 10px #0000001f;
+}
+
+.sobField input{
+    flex:1;
+    width:auto;
+    margin:0;
+    padding:12px 14px;
+    outline:0;
+    background:transparent;
+    box-shadow:none;
+}
+
+#scanBtn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:46px;
+    height:46px;
+    margin:0;
+    padding:0;
+    border-left:1px solid #ddd;
+    border-radius:0;
+    background:transparent;
+    box-shadow:none;
+}
+
+#scanBtn svg{
+    width:22px;
+    height:22px;
+    fill:#222;
+}
+
+body.dark #scanBtn svg{
+    fill:#fff;
+}
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+table{
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
+    border:1px solid #000;
+    background:var(--table);
+    font-size:12px;
+}
+
+th,
+td{
+    padding:2px 4px;
+    border:1px solid #000;
+    text-align:center;
+    vertical-align:middle;
+    line-height:14px;
+}
+
+body.dark th,
+body.dark td{
+    border-color:#555;
+    color:#fff;
+}
+
+body.dark th{
+    background:#303030;
+}
+
+body.dark td{
+    background:#252525;
+}
+
+.header{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+    align-items:center;
+    width:100%;
+    gap:6px;
+    margin-bottom:10px;
+    font-size:13px;
+    overflow:visible;
+}
+
+.header-left,
+.header-center,
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    min-width:0;
+}
+
+.header-left{
+    justify-content:flex-start;
+}
+
+.header-center{
+    justify-content:center;
+    white-space:nowrap;
+}
+
+.header-right{
+    justify-content:flex-end;
+    white-space:nowrap;
+}
+
+.headerText{
+    white-space:nowrap;
+    font-weight:bold;
+}
+
+.headerLine{
+    display:inline-flex;
+    align-items:flex-end;
+    justify-content:center;
+    width:max-content;
+    min-width:120px;
+    max-width:none;
+    height:16px;
+    padding:0 6px;
+    border-bottom:1.5px solid #000;
+    white-space:nowrap;
+    font-weight:bold;
+    line-height:16px;
+}
+
+.header-right span{
+    font-weight:normal;
+}
+
+.activityCell{
+    padding:6px 6px 6px 12px;
+    background:transparent;
+    font-size:10px;
+    font-weight:bold;
+    text-align:left!important;
+    vertical-align:top;
+}
+
+.activityCell pre{
+    margin:0;
+    font:inherit;
+    line-height:12px;
+    white-space:pre-wrap;
+}
+
+.activityTotalsCell{
+    padding:6px 6px 6px 12px;
+    background:#eaeaea;
+    font-size:10px;
+    font-weight:bold;
+    text-align:left!important;
+    vertical-align:top;
+}
+
+body.dark .activityCell{
+    background:#2a2a2a;
+}
+
+body.dark .activityTotalsCell{
+    background:#333;
+}
+
+.editBtn,
+.deleteBtn{
+    min-width:auto;
+    margin:0;
+    padding:2px 6px;
+    font-size:11px;
+    line-height:1;
+    box-shadow:3px 3px 0 #9e9e9e,5px 6px 12px #0004;
+}
+
+.print-all-wrap{
+    position:relative;
+    display:inline-block;
+}
+
+.print-split{
+    display:inline-flex;
+    align-items:center;
+    overflow:hidden;
+    border-radius:28px;
+    vertical-align:middle;
+    box-shadow:4px 4px 0 #bdbdbd,6px 8px 14px #0003;
+}
+
+.print-split button{
+    margin:0;
+    border-radius:0;
+    padding:12px 18px;
+    background:linear-gradient(to bottom,#fff,#e8e8e8);
+    box-shadow:none;
+}
+
+.print-print-btn{
+    border-radius:28px 0 0 28px!important;
+    border-right:1px solid #bdbdbd!important;
+}
+
+.print-all-btn{
+    min-width:75px;
+    padding-right:14px!important;
+    padding-left:12px!important;
+    border-radius:0 28px 28px 0!important;
+}
+
+body.dark .print-split button{
+    color:#fff;
+    background:linear-gradient(#444,#2c2c2c);
+}
+
+.print-dropdown{
+    display:none;
+    position:absolute;
+    top:100%;
+    right:0;
+    z-index:9999;
+    width:200px;
+    margin-top:6px;
+    padding:8px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--card);
+    box-shadow:0 8px 20px #0003;
+    text-align:left;
+}
+
+.print-dropdown.show{
+    display:block;
+}
+
+.print-user-list{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    max-height:220px;
+    overflow:auto;
+}
+
+.print-user-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    line-height:1.2;
+}
+
+.print-user-item input{
+    width:auto;
+    margin:0;
+    padding:0;
+    box-shadow:none;
+}
+
+.editModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:10000;
+    align-items:center;
+    justify-content:center;
+    background:#0009;
+    backdrop-filter:blur(4px);
+}
+
+.editModal.show{
+    display:flex;
+}
+
+.editCard{
+    width:95%;
+    max-width:360px;
+    max-height:85vh;
+    overflow-y:auto;
+    padding:14px;
+    border:1px solid #ffffffcc;
+    border-radius:20px;
+    background:var(--card);
+    color:var(--text);
+    box-shadow:10px 14px 40px #0004;
+}
+
+.editTitle{
+    margin-bottom:15px;
+    color:#1565c0;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.editField{
+    width:100%;
+    margin:8px 0;
+    padding:12px;
+    border:2px solid #e0e0e0;
+    border-radius:12px;
+    font-size:15px;
+}
+
+.timeField{
+    width:100%;
+    min-width:0;
+}
+
+.editActions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+.saveBtn{
+    min-width:120px;
+    color:#fff;
+    background:linear-gradient(135deg,#00c853,#009624);
+}
+
+.cancelBtn{
+    min-width:120px;
+    color:#fff;
+    background:linear-gradient(135deg,#ff5252,#c62828);
+}
+
+.footer-left{
+    position:fixed;
+    bottom:5px;
+    left:10px;
+    z-index:3;
+    font-size:12px;
+}
+
+#cloudStatus{
+    margin-left:5px;
+    font-size:15px;
+}
+
+.scannerOverlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    flex-direction:column;
+    background:#000e;
+}
+
+.scannerOverlay.show{
+    display:flex;
+}
+
+.scannerTopBar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    background:#0006;
+}
+
+.scannerActionBtn{
+    margin:0;
+    padding:8px 14px;
+    color:#000;
+    background:#fff;
+    box-shadow:3px 3px 0 #999,5px 6px 12px #0003;
+}
+
+.scannerBox{
+    flex:1;
+    min-height:0;
+    width:100%;
+    background:#111;
+}
+
+#reader{
+    width:100%;
+    height:100%;
+    min-height:0;
+}
+
+#reader video{
+    display:block;
+    width:100%!important;
+    height:100%!important;
+    min-height:100vh;
+    object-fit:cover;
+}
+
+#reader{
+    position:relative;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    overflow:hidden;
+}
+
+#reader video{
+    display:block;
+    width:100%!important;
+    height:100%!important;
+    min-height:100%;
+    object-fit:cover;
+}
+
+/* Hide only the scanner library controls, not the video. */
+#reader__dashboard_section{
+    display:none!important;
+}
+
+#reader__scan_region{
+    width:100%!important;
+    height:100%!important;
+}
+
+@keyframes popIn{
+    from{transform:scale(.9);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+@media print{
+    @page{
+        size:A4 portrait;
+        margin:8mm;
+    }
+
+    html,
+    body{
+        width:100%;
+        height:auto;
+        margin:0;
+        padding:0;
+        overflow:visible;
+        color:#000!important;
+        background:#fff!important;
+        font-family:'Arimo',sans-serif;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .container,
+    .top-buttons,
+    .footer-left,
+    .editModal,
+    .scannerOverlay,
+    button,
+    .editColumn,
+    .deleteColumn{
+        display:none!important;
+    }
+
+    #printArea{
+        display:block!important;
+        width:100%;
+        margin:0;
+        padding:0;
+    }
+
+    table{
+        width:100%;
+        min-width:0;
+        table-layout:auto;
+        font-size:10px;
+        background:#fff!important;
+    }
+
+    th,
+    td{
+        padding:3px;
+        border:1px solid #000!important;
+        color:#000!important;
+        background:#fff!important;
+        white-space:nowrap;
+    }
+
+    .activityCell{
+        font-size:9px;
+        line-height:11px;
+    }
+
+    .activityTotalsCell{
+        color:#000!important;
+        background:#eaeaea!important;
+    }
+
+    .header{
+        display:grid!important;
+        grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+        width:100%!important;
+        margin-bottom:8px;
+        font-size:11px;
+        overflow:visible!important;
+    }
+
+    .header-left{
+        display:flex!important;
+    }
+
+    .header-center{
+        display:flex!important;
+        justify-content:center!important;
+        white-space:nowrap!important;
+    }
+
+    .header-right{
+        display:flex!important;
+        justify-content:flex-end!important;
+        white-space:nowrap!important;
+    }
+
+    .headerLine{
+        width:max-content!important;
+        min-width:100px!important;
+        max-width:none!important;
+        white-space:nowrap!important;
+        overflow:visible!important;
+    }
+
+    .header-right span{
+        font-weight:normal!important;
+    }
+}
+
+@media(max-width:768px){
+    table{
+        min-width:700px;
+    }
+}
+/* Dark mode corrections */
+body.dark .print-split{
+    box-shadow:4px 4px 0 #111,6px 8px 14px #0007;
+}
+
+body.dark .print-split button{
+    color:#fff;
+    background:linear-gradient(#444,#2c2c2c);
+    border-color:#666!important;
+}
+
+body.dark .print-dropdown{
+    border-color:#666;
+    background:#242424;
+    color:#fff;
+    box-shadow:0 8px 20px #0009;
+}
+
+body.dark .print-user-item{
+    color:#fff;
+}
+
+body.dark .editCard{
+    border-color:#666;
+    background:#242424;
+    color:#fff;
+    box-shadow:10px 14px 40px #0009;
+}
+
+body.dark .editField{
+    border-color:#666;
+    background:#2f2f2f;
+    color:#fff;
+}
+
+body.dark .editField option{
+    background:#2f2f2f;
+    color:#fff;
+}
+
+body.dark .table-wrapper{
+    scrollbar-color:#777 #222;
+}
+
+body.dark .table-wrapper::-webkit-scrollbar{
+    height:10px;
+}
+
+body.dark .table-wrapper::-webkit-scrollbar-track{
+    background:#222;
+}
+
+body.dark .table-wrapper::-webkit-scrollbar-thumb{
+    background:#777;
+    border-radius:10px;
+}
+
+body.dark .print-dropdown,
+body.dark .editCard{
+    scrollbar-color:#777 #222;
+}
+
+body.dark .print-dropdown::-webkit-scrollbar,
+body.dark .editCard::-webkit-scrollbar{
+    width:9px;
+}
+
+body.dark .print-dropdown::-webkit-scrollbar-track,
+body.dark .editCard::-webkit-scrollbar-track{
+    background:#222;
+}
+
+body.dark .print-dropdown::-webkit-scrollbar-thumb,
+body.dark .editCard::-webkit-scrollbar-thumb{
+    background:#777;
+    border-radius:10px;
+}
+@media print{
+    html,
+    body,
+    #printArea,
+    #a4,
+    .table-wrapper{
+        width:100%!important;
+        max-width:none!important;
+        height:auto!important;
+        overflow:visible!important;
+    }
+
+    .table-wrapper{
+        display:block!important;
+        overflow-x:visible!important;
+        overflow-y:visible!important;
+    }
+
+    #printArea table{
+        width:100%!important;
+        min-width:0!important;
+    }
+}
+
+/*
+body.golden input,
+body.golden select,
+body.golden .sobField,
+body.golden .box,
+body.golden .editCard,
+body.golden .print-dropdown{
+    color:#4a3514;
+    background-color:#ead39a;
+}
+
+body.golden input::placeholder{
+    color:#80642b;
+    opacity:1;
+}
+
+body.golden option{
+    color:#4a3514;
+    background:#ead39a;
+}
+
+body.golden .sobField input{
+    background:transparent;
+}
+
+body.golden .editField{
+    border-color:#b38a3d;
+}
+
+body.golden .editTitle{
+    color:#80642b;
+}
+
+body.golden .headerLine{
+    border-color:#80642b;
+}
+
+body.golden .highlight-total{
+    border-color:#b38a3d;
+    color:#4a3514;
+    background:#f0dda9;
+}
+
+body.golden table,
+body.golden th,
+body.golden td{
+    border-color:#b38a3d;
+    color:#4a3514;
+    background:#ead39a;
+}
+
+body.golden .activityTotalsCell{
+    background:#f0dda9;
+}
+
+body.golden #scanBtn{
+    border-left-color:#b38a3d;
+}
+
+body.golden .box,
+body.golden .editCard{
+    border-color:#b38a3d;
+}
+
+body.golden .print-dropdown{
+    border-color:#b38a3d;
+}
+
+body.golden .editField{
+    background-color:#f0dda9;
+    color:#4a3514;
+}
+
+body.golden .editField option{
+    background:#f0dda9;
+    color:#4a3514;
+}
+
+body.golden #scanBtn svg{
+    fill:#4a3514;
+}
+
+body.golden .activityTotalsCell{
+    color:#4a3514;
+}
+
+body.golden .headerLine{
+    color:#4a3514;
+}
+
+body.golden .highlight-total{
+    box-shadow:0 0 8px #d5ad51;
+    animation:none;
+}
+
+body.golden .print-user-item{
+    color:#4a3514;
+}
+
+body.golden .print-dropdown{
+    box-shadow:0 8px 20px #694b1640;
+}
+
+body.golden .editCard{
+    box-shadow:10px 14px 40px #694b1640;
+}
+
+body.golden .box{
+    box-shadow:8px 8px 20px #694b1630;
+}
+
+body.golden .sobField,
+body.golden input,
+body.golden select{
+    box-shadow:inset 2px 2px 5px #694b1614,4px 4px 10px #694b1620;
+}
+
+body.golden .sobField input{
+    box-shadow:none;
+}
+
+body.golden #scanBtn{
+    background:transparent;
+}
+
+body.golden .activityCell{
+    color:#4a3514;
+}
+
+body.golden .editTitle{
+    text-shadow:0 1px #f6e7bd;
+}
+
+body.golden .warning{
+    color:#7a321c;
+}
+
+body.golden .print-user-item input{
+    accent-color:#9a722b;
+}
+
+body.golden .headerLine{
+    border-bottom-color:#80642b;
+}
+
+body.golden hr{
+    border-color:#b38a3d;
+}
+
+body.golden .activityTotalsCell{
+    background:#e4c778;
+}
+
+body.golden th{
+    background:#dfc175;
+}
+
+body.golden input:focus,
+body.golden select:focus{
+    outline:2px solid #b38a3d;
+}
+
+body.golden .print-dropdown{
+    scrollbar-color:#b38a3d #ead39a;
+}
+
+body.golden .print-dropdown::-webkit-scrollbar-track{
+    background:#ead39a;
+}
+
+body.golden .print-dropdown::-webkit-scrollbar-thumb{
+    background:#b38a3d;
+    border-radius:10px;
+}
+
+body.golden .editCard{
+    scrollbar-color:#b38a3d #ead39a;
+}
+
+body.golden .editCard::-webkit-scrollbar-track{
+    background:#ead39a;
+}
+
+body.golden .editCard::-webkit-scrollbar-thumb{
+    background:#b38a3d;
+    border-radius:10px;
+}
+
+body.golden .table-wrapper{
+    scrollbar-color:#b38a3d #ead39a;
+}
+
+body.golden .table-wrapper::-webkit-scrollbar-track{
+    background:#ead39a;
+}
+
+body.golden .table-wrapper::-webkit-scrollbar-thumb{
+    background:#b38a3d;
+    border-radius:10px;
+}
+
+body.golden .headerLine,
+body.golden .headerText{
+    color:#4a3514;
+}
+
+body.golden .activityTotalsCell,
+body.golden .activityCell{
+    color:#4a3514;
+}
+
+body.golden .editField::placeholder{
+    color:#80642b;
+}
+
+body.golden .editTitle{
+    color:#80642b;
+}
+
+body.golden .print-dropdown{
+    color:#4a3514;
+}
+
+body.golden .table-wrapper{
+    background:#ead39a;
+}
+
+body.golden .headerLine{
+    background:transparent;
+}
+
+body.golden .sobField{
+    border:1px solid #b38a3d;
+}
+
+body.golden .box,
+body.golden .editCard{
+    border:1px solid #b38a3d;
+}
+
+body.golden .print-dropdown{
+    border:1px solid #b38a3d;
+}
+
+body.golden .highlight-total{
+    border:3px solid #b38a3d;
+}
+
+body.golden #scanBtn{
+    border-left:1px solid #b38a3d;
+}
+
+body.golden .editField{
+    border:2px solid #b38a3d;
+}
+
+body.golden .print-dropdown,
+body.golden .editCard{
+    color:#4a3514;
+}
+
+body.golden .activityTotalsCell{
+    font-weight:bold;
+}
+
+body.golden .table-wrapper::-webkit-scrollbar{
+    height:10px;
+}
+
+body.golden .print-dropdown::-webkit-scrollbar,
+body.golden .editCard::-webkit-scrollbar{
+    width:9px;
+}
+
+body.golden .editTitle{
+    text-shadow:none;
+}
+
+body.golden .highlight-total{
+    animation:none;
+}
+
+body.golden .box{
+    background:#ead39a;
+}
+
+body.golden .editCard{
+    background:#ead39a;
+}
+
+body.golden .print-dropdown{
+    background:#ead39a;
+}
+
+body.golden .sobField{
+    background:#ead39a;
+}
+
+body.golden input,
+body.golden select{
+    background-color:#f0dda9;
+}
+
+body.golden table,
+body.golden td{
+    background:#ead39a;
+}
+
+body.golden th{
+    background:#dfc175;
+}
+
+body.golden .activityTotalsCell{
+    background:#e4c778;
+}
+
+body.golden .headerLine{
+    border-bottom:1.5px solid #80642b;
+}
+
+body.golden #scanBtn svg{
+    fill:#4a3514;
+}
+
+body.golden .editTitle{
+    color:#80642b;
+}
+
+body.golden .print-user-item{
+    color:#4a3514;
+}
+
+body.golden .sobField input{
+    background:transparent;
+}
+
+body.golden .highlight-total{
+    color:#4a3514;
+    background:#f0dda9;
+}
+
+body.golden .editField{
+    color:#4a3514;
+}
+
+body.golden .header-right span{
+    color:#4a3514;
+}
+
+body.golden .footer-left{
+    color:#4a3514;
+}
+
+body.golden .hiText{
+    color:#4a3514;
+}
+
+body.golden .row{
+    color:#4a3514;
+}
+
+body.golden h2{
+    color:#4a3514;
+}
+
+body.golden .activityCell pre{
+    color:#4a3514;
+}
+
+body.golden .editCard div{
+    color:#4a3514;
+}
+
+body.golden .print-dropdown div{
+    color:#4a3514;
+}
+
+body.golden .editCard .saveBtn,
+body.golden .editCard .cancelBtn{
+    color:#fff;
+}
+
+body.golden .headerText{
+    color:#4a3514;
+}
+
+body.golden #cloudStatus{
+    color:inherit;
+}
+
+body.golden #warning{
+    color:#a3331e!important;
+}
+
+body.golden table{
+    border-color:#b38a3d;
+}
+
+body.golden th,
+body.golden td{
+    border-color:#b38a3d;
+}
+
+body.golden .editField{
+    border-color:#b38a3d;
+}
+
+body.golden .print-dropdown{
+    border-color:#b38a3d;
+}
+
+body.golden .sobField{
+    box-shadow:inset 2px 2px 5px #694b1614,4px 4px 10px #694b1620;
+}
+
+body.golden .box{
+    box-shadow:8px 8px 20px #694b1630;
+}
+
+body.golden .headerLine{
+    color:#4a3514;
+}
+
+body.golden .table-wrapper{
+    background:#ead39a;
+}
+
+body.golden .editModal{
+    background:#0008;
+}
+
+body.golden .activityTotalsCell{
+    background:#e4c778;
+}
+
+body.golden .print-split{
+    box-shadow:4px 4px 0 #bdbdbd,6px 8px 14px #0003;
+}
+
+body.golden .editActions button{
+    color:#fff;
+}
+
+body.golden .editTitle{
+    color:#80642b;
+}
+
+body.golden .headerLine{
+    border-color:#80642b;
+}
+
+body.golden .highlight-total{
+    border-color:#b38a3d;
+}
+
+body.golden table,
+body.golden th,
+body.golden td{
+    border-color:#b38a3d;
+}
+
+*/
+</style>
+</head>
+
+<body>
+
+<div class="top-buttons">
+    <a class="switch-btn reverse-btn" href="https://sobcombo.github.io/reverse/" target="_blank">
+        Reverse Combo Finder
+    </a>
+
+    <a class="switch-btn report-btn" href="https://sobcombo.github.io/r/" target="_blank">
+        Daily Report Generator
+    </a>
+</div>
+
+<div class="container">
+
+<div class="userLoginBox">
+    <span class="hiText" onclick="toggleTheme()">🌞 Hi,</span>
+    <input id="usernameInput" type="text" placeholder="Enter Username" autocomplete="off">
+    <button id="loadBtn" onclick="restoreTodayData()">Load</button>
+</div>
+
+<h2>SOB coMboS calculator</h2>
+
+<select id="combo" onchange="calc()">
+    <option value="">Select Combo</option>
+
+    <option value="170,80,40,89">299/209&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Explorer Combo</option>
+    <option value="170,80,0,227">397/307&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Eco Adventure Combo</option>
+    <option value="170,80,28,200">398/308&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Eco Fun Combo</option>
+    <option value="170,80,255,0">425/335&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Snow Adventure Combo</option>
+    <option value="470,400,0,100">570/500&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Aastha Combo</option>
+    <option value="170,0,0,529,NA">699/NA&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Adventure Combo</option>
+    <option value="650,475,0,50">700/525&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Namah Combo</option>
+    <option value="470,280,155,150">775/585&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Viewing Fun Combo</option>
+    <option value="470,280,249,50">769/579&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Symbolic Play Combo</option>
+    <option value="170,80,199,520">889/799&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Ultimate Play Combo</option>
+    <option value="470,380,105,350">925/835&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Delight Combo</option>
+    <option value="670,480,199,100">969/779&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Mini Blast Combo</option>
+    <option value="450,275,200,450">1100/925&nbsp;&nbsp;:&nbsp;&nbsp;All In Fun Combo</option>
+    <option value="1450,875,0,100">1550/975&nbsp;&nbsp;:&nbsp;&nbsp;Divine Rush Combo</option>
+    <option value="1500,300,449,2300,NA">4249/NA&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Ultimate Mega Combo</option>
+</select>
+
+<br>
+
+<input id="adults" type="tel" inputmode="numeric" maxlength="3"
+       placeholder="No. of Adults" oninput="limitPax(this);calc()">
+
+<br>
+
+<input id="children" type="tel" inputmode="numeric" maxlength="3"
+       placeholder="No. of Children" oninput="limitPax(this);calc()">
+
+<p id="warning" style="color:red"></p>
+
+<div class="box">
+    <div class="row">
+        <span>TPU</span>
+        <span>₹ <span id="tpu">0</span></span>
+    </div>
+
+    <div class="row">
+        <span>OEPL</span>
+        <span>₹ <span id="oepl">0</span></span>
+    </div>
+
+    <div class="row">
+        <span>PAEPL</span>
+        <span>₹ <span id="paepl">0</span></span>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <b style="font-size:14px">TOTAL</b>
+        <span id="totalBox" class="highlight-total">
+            ₹ <span id="total">0</span>
+        </span>
+    </div>
+</div>
+
+<br>
+
+<div class="sobField">
+    <input id="sobInput" type="tel" inputmode="numeric" maxlength="6"
+           placeholder="Enter 6-digit SOB ID" autocomplete="off">
+
+    <button id="scanBtn" type="button" onclick="startScanner()" aria-label="Scan QR code">
+        <svg viewBox="0 0 24 24">
+            <path d="M9 4L7.5 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3.5L15 4H9zm3 4a5 5 0 1 1 0 10a5 5 0 0 1 0-10zm0 2.2a2.8 2.8 0 1 0 0 5.6a2.8 2.8 0 0 0 0-5.6z"/>
+        </svg>
+    </button>
+</div>
+
+<br>
+
+<button onclick="saveEntry()" style="background:linear-gradient(135deg,#1976d2,#0d47a1);color:#fff">
+    Save SOB
+</button>
+
+<button onclick="resetForm()" style="background:linear-gradient(135deg,#ff9800,#ef6c00);color:#fff">
+    Reset Calculator
+</button>
+
+<br>
+
+<button onclick="printA4()">📄 Print My A4</button>
+
+<div class="print-all-wrap">
+    <div class="print-split">
+        <button class="print-print-btn" onclick="printSelectedUsers()">📑 Print</button>
+        <button class="print-all-btn" id="allPrintBtn" onclick="togglePrintMenu(event)">
+            ALL ▼
+        </button>
+    </div>
+
+    <div id="printMenu" class="print-dropdown">
+        <div id="printUserList" class="print-user-list"></div>
+    </div>
+</div>
+
+</div>
+
+<div id="printArea">
+<div id="a4">
+
+<div class="header">
+    <div class="header-left"></div>
+
+    <div class="header-center">
+        <span class="headerText">USERNA<b>M</b>E.<b>S</b> :</span>
+        <span id="username" class="headerLine"></span>
+    </div>
+
+    <div class="header-right">
+        <b class="headerText">DATE :</b>
+        <span id="date"></span>
+    </div>
+</div>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+    <th class="editColumn" style="width:40px">EDIT</th>
+    <th class="deleteColumn" style="width:40px">DEL</th>
+    <th>SR</th>
+    <th>SOB ID</th>
+    <th>TPU</th>
+    <th>OEPL</th>
+    <th>PAEPL</th>
+    <th>TOTAL</th>
+    <th>ACTIVITIES' AMOUNTS</th>
+    <th>TIME</th>
+</tr>
+</thead>
+
+<tbody id="dataBody"></tbody>
+
+<tfoot>
+<tr>
+    <td class="editColumn"></td>
+    <td class="deleteColumn"></td>
+    <td colspan="2"><b>TOTAL</b></td>
+    <td id="tpuT"><b>0</b></td>
+    <td id="oeplT"><b>0</b></td>
+    <td id="paeplT"><b>0</b></td>
+    <td id="grandT"><b>0</b></td>
+    <td id="activityTotals" class="activityTotalsCell"></td>
+    <td>
+        <button onclick="resetAllData()" style="font-size:10px;padding:4px 6px;background:#d32f2f;color:#fff">
+            Reset All
+        </button>
+    </td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+</div>
+</div>
+
+<div id="editModal" class="editModal">
+<div class="editCard">
+
+    <div class="editTitle">✏️ Edit SOB Entry</div>
+
+    <div style="text-align:left;font-size:13px;font-weight:bold">SOB ID</div>
+    <input id="editSob" class="editField" type="tel" maxlength="6" inputmode="numeric">
+
+    <div style="display:flex;gap:8px">
+        <div style="flex:1">
+            <div style="text-align:left;font-size:13px;font-weight:bold">Adults</div>
+            <input id="editAdults"
+       class="editField"
+       type="number"
+       min="0"
+       max="100"
+       oninput="limitPax(this)">
+        </div>
+
+        <div style="flex:1">
+            <div style="text-align:left;font-size:13px;font-weight:bold">Children</div>
+            <input id="editChildren"
+       class="editField"
+       type="number"
+       min="0"
+       max="100"
+       oninput="limitPax(this)">
+        </div>
+    </div>
+
+    <div style="text-align:left;font-size:13px;font-weight:bold">Combo Type</div>
+    <select id="editCombo" class="editField"></select>
+
+    <div style="display:flex;gap:8px">
+        <select id="editHour" class="editField timeField"></select>
+        <select id="editMinute" class="editField timeField"></select>
+        <select id="editAmPm" class="editField timeField">
+            <option>AM</option>
+            <option>PM</option>
+        </select>
+    </div>
+
+    <div class="editActions">
+        <button class="saveBtn" onclick="saveEdit()">Save</button>
+        <button class="cancelBtn" onclick="closeEditModal()">Cancel</button>
+    </div>
+
+</div>
+</div>
+
+<div class="footer-left">
+    26J10 | V5.0 <span id="cloudStatus" title="Cloud status">☁️✅</span>
+</div>
+
+<div id="scannerOverlay" class="scannerOverlay">
+    <div class="scannerTopBar">
+        <button onclick="uploadQrImage()" class="scannerActionBtn">Upload</button>
+        <button onclick="closeScanner()" class="scannerActionBtn">✕ Close</button>
+    </div>
+
+    <div class="scannerBox">
+        <div id="reader"></div>
+        <input id="uploadQrInput" type="file" accept="image/*"
+               style="display:none"
+               onchange="handleQrUpload(event)">
+    </div>
+</div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+const APP_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbw_Vhlq9wHwMBBrY0gmzfLSObRzxR_ATE2jonce0aoO38O5xcjbzkG5I1sFhp61NvTQ/exec";
+let data = JSON.parse(localStorage.getItem("sobData") || "[]");
+let editingIndex = -1;
+let qrScanner = null;
+let scanLocked = false;
+let ocrTimer = null;
+let ocrBusy = false;
+let ocrWorker = null;
+let deviceId = localStorage.getItem("deviceId");
+
+if(!deviceId){
+    deviceId =
+        "DEV-" +
+        Date.now().toString(36) +
+        "-" +
+        Math.random().toString(36).substring(2,8).toUpperCase();
+
+    localStorage.setItem("deviceId",deviceId);
+}
+
+const combo = document.getElementById("combo");
+const adults = document.getElementById("adults");
+const children = document.getElementById("children");
+const sobInput = document.getElementById("sobInput");
+const warning = document.getElementById("warning");
+
+const tpuEl = document.getElementById("tpu");
+const oeplEl = document.getElementById("oepl");
+const paeplEl = document.getElementById("paepl");
+const totalEl = document.getElementById("total");
+
+const dataBody = document.getElementById("dataBody");
+const grandT = document.getElementById("grandT");
+const tpuT = document.getElementById("tpuT");
+const oeplT = document.getElementById("oeplT");
+const paeplT = document.getElementById("paeplT");
+const activityTotals = document.getElementById("activityTotals");
+
+const usernameInput = document.getElementById("usernameInput");
+const usernameEl = document.getElementById("username");
+const dateEl = document.getElementById("date");
+
+const editModal = document.getElementById("editModal");
+const editSob = document.getElementById("editSob");
+const editAdults = document.getElementById("editAdults");
+const editChildren = document.getElementById("editChildren");
+const editCombo = document.getElementById("editCombo");
+const editHour = document.getElementById("editHour");
+const editMinute = document.getElementById("editMinute");
+const editAmPm = document.getElementById("editAmPm");
+
+const scannerOverlay = document.getElementById("scannerOverlay");
+const uploadQrInput = document.getElementById("uploadQrInput");
+const printMenu = document.getElementById("printMenu");
+const printUserList = document.getElementById("printUserList");
+const cloudStatus = document.getElementById("cloudStatus");
+
+function todayString(){
+    return new Intl.DateTimeFormat("en-GB",{
+        timeZone:"Asia/Kolkata",
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+    }).format(new Date());
+}
+
+function timeString(){
+    return new Intl.DateTimeFormat("en-US",{
+        timeZone:"Asia/Kolkata",
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:true
+    }).format(new Date());
+}
+
+function pad2(value){
+    return String(value).padStart(2,"0");
+}
+function createEntryId(){
+    if(
+        window.crypto &&
+        typeof window.crypto.randomUUID === "function"
+    ){
+        return window.crypto.randomUUID();
+    }
+
+    return "ENTRY-" +
+        Date.now() +
+        "-" +
+        Math.random().toString(36).slice(2);
+}
+function limitPax(input){
+    input.value = input.value.replace(/[^0-9]/g,"").slice(0,3);
+
+    if(+input.value > 100){
+        input.value = "100";
+    }
+}
+
+function getUsername(){
+    return usernameInput.value.trim();
+}
+
+function getUserDataKey(username = getUsername()){
+    const user = username.trim().toLowerCase();
+
+    return `sobData:${todayString()}:${user || "unknown"}`;
+}
+
+function saveLocalData(){
+    const serialized = JSON.stringify(data);
+
+    localStorage.setItem("sobData",serialized);
+    localStorage.setItem("sobDataBackup",serialized);
+
+    if(getUsername()){
+        localStorage.setItem(
+            getUserDataKey(),
+            serialized
+        );
+    }
+}
+
+function loadUserLocalData(){
+    const username = getUsername();
+
+    if(!username){
+        data = [];
+        return;
+    }
+
+    const userKey = getUserDataKey(username);
+    const userData = localStorage.getItem(userKey);
+
+    if(userData){
+        try{
+            data = (JSON.parse(userData) || []).filter(row =>
+    String(row.date || "").trim() === todayString()
+);
+
+saveLocalData();
+return;
+
+        }catch(error){
+            console.warn("Invalid user data:",error);
+        }
+    }
+
+    const oldData = localStorage.getItem("sobData");
+
+    if(oldData){
+        try{
+            const parsed = JSON.parse(oldData);
+
+            const matchingRows = Array.isArray(parsed)
+    ? parsed.filter(row =>
+        String(row.displayName || "")
+            .trim()
+            .toLowerCase() === username.toLowerCase() &&
+        String(row.date || "") === todayString()
+    )
+    : [];
+
+
+            data = matchingRows;
+            saveLocalData();
+            return;
+        }catch(error){
+            console.warn("Unable to migrate old local data:",error);
+        }
+    }
+
+    data = [];
+}
+
+
+function setCloudStatus(status){
+    if(status === "offline"){
+        cloudStatus.textContent = "☁️❌";
+        cloudStatus.title = "Network unavailable. Data saved offline.";
+    }else if(status === "syncing"){
+        cloudStatus.textContent = "☁️🔄";
+        cloudStatus.title = "Syncing with Google Sheets...";
+    }else{
+        cloudStatus.textContent = "☁️✅";
+        cloudStatus.title = "Data successfully synced.";
+    }
+}
+
+function postToCloud(payload){
+    setCloudStatus("syncing");
+
+    return fetch(APP_SCRIPT_URL,{
+        method:"POST",
+        headers:{"Content-Type":"text/plain"},
+        body:JSON.stringify(payload)
+    }).then(response => response.json());
+}
+
+function saveFormState(){
+    localStorage.setItem("lastCombo",combo.value);
+    localStorage.setItem("lastAdults",adults.value);
+    localStorage.setItem("lastChildren",children.value);
+}
+
+function normalizeSob(value){
+    const text = String(value || "")
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g,"");
+
+    // Direct manual entry: exactly six digits
+    if(/^\d{6}$/.test(text)) {
+    const number = Number(text);
+
+    if(number >= 100000 && number <= 999999) {
+        return text;
+    }
+
+    return "";
+}
+
+
+    // QR/OCR text: SOB000 followed by six digits
+    const match = text.match(/SOB000(\d{6})(?!\d)/);
+
+    return match ? match[1] : "";
+}
+
+
+function calc(){
+    if(!combo.value){
+        tpuEl.textContent = "0";
+        oeplEl.textContent = "0";
+        paeplEl.textContent = "0";
+        totalEl.textContent = "0";
+        warning.textContent = "";
+        return null;
+    }
+
+    const parts = combo.value.split(",");
+    const adultsCount = Math.max(0,+adults.value || 0);
+    const childrenCount = Math.max(0,+children.value || 0);
+
+    const tpu =
+        adultsCount * (+parts[0]) +
+        childrenCount * (+parts[1]);
+
+    const oepl =
+        (adultsCount + childrenCount) * (+parts[2]);
+
+    const paepl =
+        (adultsCount + childrenCount) * (+parts[3]);
+
+    const total = tpu + oepl + paepl;
+
+    tpuEl.textContent = tpu;
+    oeplEl.textContent = oepl;
+    paeplEl.textContent = paepl;
+    totalEl.textContent = total;
+
+    warning.textContent =
+        parts[4] === "NA" && childrenCount > 0
+        ? "⚠ Children not allowed"
+        : "";
+
+    saveFormState();
+
+    return {tpu,oepl,paepl,total};
+}
+
+function getVendorBreakup(comboName,pax){
+    comboName = String(comboName || "").toLowerCase();
+
+    function line(items){
+        return items
+            .map(item => `${item.name}: ${item.price * pax}`)
+            .join(" | ");
+    }
+
+    /* New October 2026 combos: grouped into the eight existing vendors. */
+    const newBreakups = {
+        "Explorer Combo": `OEPL → Wax: ${40 * pax}\nPAEPL → Eyelusion: ${40 * pax} | WOK + WOG: ${49 * pax}`,
+        "Eco Adventure Combo": `PAEPL → Gamezone: ${227 * pax}`,
+        "Eco Fun Combo": `OEPL → Wax: ${28 * pax}\nPAEPL → Mayalok: ${200 * pax}`,
+        "Snow Adventure Combo": `OEPL → Snow: ${255 * pax}`,
+        "Aastha Combo": `TPU → WOK + WOG: ${100 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${50 * pax}`,
+        "Adventure Combo": `PAEPL → Gamezone: ${529 * pax}`,
+        "Namah Combo": `TPU → WOK + WOG: ${100 * pax}\nPAEPL → Gamezone: ${50 * pax}`,
+        "Viewing Fun Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Food: ${45 * pax} | Souvenir: ${60 * pax} | Wax: ${50 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${100 * pax}`,
+        "Symbolic Play Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Snow: ${200 * pax} | Food: ${49 * pax}\nPAEPL → Gamezone: ${50 * pax}`,
+        "Ultimate Play Combo": `OEPL → Snow: ${199 * pax}\nPAEPL → Gamezone: ${250 * pax} | WOK + WOG: ${70 * pax} | Mayalok: ${200 * pax}`,
+        "Delight Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Food: ${45 * pax} | Souvenir: ${60 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${100 * pax} | Mayalok: ${200 * pax}`,
+        "Mini Blast Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Food: ${50 * pax} | Souvenir: ${99 * pax} | Wax: ${50 * pax}\nPAEPL → Gamezone: ${100 * pax}`,
+        "All in Fun Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Snow: ${200 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${200 * pax} | Mayalok: ${200 * pax}`,
+        "Divine Rush Combo": `TPU → WOK + WOG: ${100 * pax}\nPAEPL → Gamezone: ${100 * pax}`,
+        "Ultimate Mega Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Snow: ${150 * pax} | Food: ${99 * pax} | Souvenir: ${100 * pax} | Wax: ${100 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${750 * pax} | Mayalok: ${1500 * pax}`
+    };
+
+    const newCombo = Object.keys(newBreakups)
+        .find(name => comboName.includes(name.toLowerCase()));
+
+    if(newCombo){
+        return newBreakups[newCombo];
+    }
+
+    if(comboName.includes("snow adventure")){
+        return `OEPL → ${line([{name:"Snow",price:255}])}`;
+    }
+
+    if(comboName.includes("adventure combo")){
+        return `PAEPL → ${line([{name:"Gamezone",price:227}])}`;
+    }
+
+    if(comboName.includes("tu explorer")){
+        return `OEPL → ${line([{name:"Wax",price:70}])}
+PAEPL → ${line([
+    {name:"Eyelusion",price:70},
+    {name:"WOG",price:80}
+])}`;
+    }
+
+    if(comboName.includes("eco fun")){
+        return `OEPL → ${line([{name:"Wax",price:28}])}
+PAEPL → ${line([{name:"Mayalok",price:200}])}`;
+    }
+
+    if(comboName.includes("aastha")){
+        return `PAEPL → ${line([{name:"Gamezone",price:99}])}`;
+    }
+
+    if(comboName.includes("shiv ganesha")){
+        return `PAEPL → ${line([
+    {name:"Eyelusion",price:50},
+    {name:"Gamezone",price:50},
+    {name:"WOG",price:75}
+])}`;
+    }
+
+    if(comboName.includes("namah")){
+        return `PAEPL → ${line([{name:"Gamezone",price:50}])}`;
+    }
+
+    if(comboName.includes("ultimate play")){
+        return `PAEPL → ${line([{name:"Gamezone",price:529}])}`;
+    }
+
+    if(comboName.includes("viewing fun")){
+        return `OEPL → ${line([
+    {name:"Snow",price:225},
+    {name:"Food",price:100}
+])}
+PAEPL → ${line([{name:"Gamezone",price:50}])}`;
+    }
+
+    if(comboName.includes("symbolic")){
+        return `OEPL → ${line([
+    {name:"Snow",price:200},
+    {name:"Wax",price:49}
+])}
+PAEPL → ${line([
+    {name:"Gamezone",price:100},
+    {name:"WOG",price:70}
+])}`;
+    }
+
+    if(
+        comboName.includes("delight") ||
+        comboName.includes("mini blast")
+    ){
+        return `OEPL → ${line([
+    {name:"Snow",price:200},
+    {name:"Food",price:45},
+    {name:"Souvenir",price:60},
+    {name:"Wax",price:50}
+])}
+PAEPL → ${line([
+    {name:"Eyelusion",price:50},
+    {name:"Mayalok",price:200},
+    {name:"Gamezone",price:249},
+    {name:"WOG",price:75}
+])}`;
+    }
+
+    if(comboName.includes("all in fun")){
+        return `OEPL → ${line([
+    {name:"Snow",price:200},
+    {name:"Wax",price:50}
+])}
+PAEPL → ${line([
+    {name:"Eyelusion",price:50},
+    {name:"Mayalok",price:200},
+    {name:"Gamezone",price:279},
+    {name:"WOG",price:70}
+])}`;
+    }
+
+    if(comboName.includes("divine rush")){
+        return `PAEPL → ${line([
+    {name:"Gamezone",price:100},
+    {name:"WOG",price:50}
+])}`;
+    }
+
+    if(comboName.includes("ultimate mega")){
+        return `OEPL → ${line([
+    {name:"Snow",price:150},
+    {name:"Food",price:99},
+    {name:"Souvenir",price:100},
+    {name:"Wax",price:100}
+])}
+PAEPL → ${line([
+    {name:"Eyelusion",price:50},
+    {name:"Mayalok",price:150},
+    {name:"Gamezone",price:2100},
+    {name:"WOG",price:50}
+])}`;
+    }
+
+    return "-";
+}
+
+function saveEntry(){
+    const raw = sobInput.value.trim();
+    const sobNumber = normalizeSob(raw);
+    const username = usernameInput.value.trim();
+
+    if(!username){
+        alert("Enter Username first.");
+        return;
+    }
+
+    if(!sobNumber){
+        alert("Enter valid 6-digit SOB ID.");
+        return;
+    }
+
+    if(!combo.value){
+    alert("Select a combo.");
+    return;
+}
+
+const adultsCount = Math.min(100,Math.max(0,+adults.value || 0));
+const childrenCount = Math.min(100,Math.max(0,+children.value || 0));
+
+adults.value = adultsCount || "";
+children.value = childrenCount || "";
+
+if(adultsCount < 1 && childrenCount < 1){
+    alert("Enter at least 1 adult or 1 child.");
+    return;
+}
+
+
+    const result = calc();
+
+    if(!result){
+        return;
+    }
+
+    const comboName = combo.options[combo.selectedIndex].text;
+    const sob = "SOB000" + sobNumber;
+
+    if(data.some(item => item.sob === sob)){
+        alert("This SOB ID already exists.");
+        return;
+    }
+
+    const entry = {
+        entryId:createEntryId(),
+        deviceId,
+        date:todayString(),
+        displayName:username,
+        sob,
+        ...result,
+        comboName,
+        adults:adultsCount,
+        children:childrenCount,
+        breakup:getVendorBreakup(
+            comboName,
+            adultsCount + childrenCount
+        ),
+        time:timeString()
+    };
+
+    data.push(entry);
+    saveLocalData();
+    render();
+
+    sobInput.value = "";
+    localStorage.setItem("username",username);
+
+    postToCloud({
+        date:todayString(),
+        ...entry
+    }).then(response => {
+        if(response.status === "success"){
+            setCloudStatus("success");
+        }else if(response.status === "duplicate"){
+            data = data.filter(
+                item => item.entryId !== entry.entryId
+            );
+
+            saveLocalData();
+            render();
+            setCloudStatus("success");
+            alert(response.message || "Duplicate SOB ID.");
+        }else{
+            setCloudStatus("offline");
+        }
+    }).catch(error => {
+        console.error(error);
+        setCloudStatus("offline");
+        alert("Network unavailable. Data was saved locally.");
+    });
+}
+
+async function restoreTodayData(){
+    const username = usernameInput.value.trim();
+
+    if(!username){
+        alert("Enter Username first.");
+        return;
+    }
+
+    localStorage.setItem("username",username);
+    usernameEl.textContent = username;
+
+    /*
+     * Show this user's local data immediately while cloud data loads.
+     */
+    loadUserLocalData();
+    render();
+
+    try{
+        setCloudStatus("syncing");
+
+        const response = await fetch(
+            APP_SCRIPT_URL +
+            "?date=" + encodeURIComponent(todayString()) +
+            "&displayName=" + encodeURIComponent(username)
+        );
+
+        const rows = await response.json();
+
+        if(rows.status === "error"){
+            alert(rows.message);
+            setCloudStatus("offline");
+            return;
+        }
+
+        if(!Array.isArray(rows) || !rows.length){
+            setCloudStatus("success");
+
+            if(!data.length){
+                alert("No data found.");
+            }
+
+            return;
+        }
+
+        data = rows;
+        saveLocalData();
+        render();
+        setCloudStatus("success");
+
+    }catch(error){
+        console.error(error);
+        setCloudStatus("offline");
+
+        if(!data.length){
+            alert(
+                "Network unavailable. " +
+                "No local data was found for this user."
+            );
+        }
+    }
+}
+
+
+function resetForm(){
+    combo.selectedIndex = 0;
+    adults.value = "";
+    children.value = "";
+    sobInput.value = "";
+
+    localStorage.removeItem("lastCombo");
+    localStorage.removeItem("lastAdults");
+    localStorage.removeItem("lastChildren");
+
+    tpuEl.textContent = "0";
+    oeplEl.textContent = "0";
+    paeplEl.textContent = "0";
+    totalEl.textContent = "0";
+    warning.textContent = "";
+}
+
+async function deleteEntry(index){
+    if(!confirm("Delete this SOB ID?")){
+        return;
+    }
+
+    const row = data[index];
+
+    try{
+        const response = await postToCloud({
+            action:"DELETE",
+            date:todayString(),
+            entryId:row.entryId,
+            deviceId
+        });
+
+        if(response.status !== "deleted"){
+            alert(response.message || "Delete failed.");
+            return;
+        }
+
+        data.splice(index,1);
+        saveLocalData();
+        render();
+        setCloudStatus("success");
+    }catch(error){
+        setCloudStatus("offline");
+        alert("Network unavailable. Delete was not completed.");
+    }
+}
+
+async function resetAllData(){
+    const username = usernameInput.value.trim();
+
+    if(!username){
+        alert("Enter Username first.");
+        return;
+    }
+
+    if(!confirm("Reset all today's SOB IDs for " + username + "?")){
+        return;
+    }
+
+    try{
+        const response = await postToCloud({
+            action:"RESET",
+            date:todayString(),
+            displayName:username,
+            deviceId
+        });
+
+        if(response.status !== "success"){
+            throw new Error(
+                response.message || "Reset failed."
+            );
+        }
+
+        data = [];
+        saveLocalData();
+        render();
+        setCloudStatus("success");
+
+    }catch(error){
+        console.error("Reset failed:",error);
+
+        // Clear local data even if the network request fails.
+        data = [];
+        saveLocalData();
+        render();
+        setCloudStatus("offline");
+
+        alert(
+            "Local data was reset, but Google Sheets could not be updated. " +
+            "Please check the Apps Script deployment and internet connection."
+        );
+    }
+}
+
+function setEditTimeOptions(){
+    editHour.innerHTML = "";
+    editMinute.innerHTML = "";
+
+    for(let hour = 1; hour <= 12; hour++){
+        editHour.innerHTML +=
+            `<option value="${hour}">${hour}</option>`;
+    }
+
+    for(let minute = 0; minute < 60; minute++){
+        const value = pad2(minute);
+
+        editMinute.innerHTML +=
+            `<option value="${value}">${value}</option>`;
+    }
+}
+
+function openEditModal(index){
+    editingIndex = index;
+
+    const row = data[index];
+
+    editSob.value = row.sob.replace("SOB000","");
+    editAdults.value = row.adults;
+    editChildren.value = row.children;
+
+    editCombo.innerHTML = "";
+
+    Array.from(combo.options)
+        .slice(1)
+        .forEach(option => {
+            const editOption =
+                document.createElement("option");
+
+            editOption.value = option.value;
+            editOption.textContent = option.text;
+            editOption.selected =
+                option.text === row.comboName;
+
+            editCombo.appendChild(editOption);
+        });
+
+    setEditTimeOptions();
+
+    const timeMatch = String(row.time || "")
+        .match(/(\d{1,2}):(\d{2})\s?(AM|PM)/i);
+
+    if(timeMatch){
+        editHour.value = String(parseInt(timeMatch[1]));
+        editMinute.value = timeMatch[2];
+        editAmPm.value = timeMatch[3].toUpperCase();
+    }
+
+    editModal.classList.add("show");
+}
+
+function closeEditModal(){
+    editModal.classList.remove("show");
+    editingIndex = -1;
+}
+
+async function saveEdit(){
+    if(editingIndex < 0){
+        return;
+    }
+        limitPax(editAdults);
+        limitPax(editChildren);
+
+        const adultsCount = Math.min(100,Math.max(0,+editAdults.value || 0));
+        const childrenCount = Math.min(100,Math.max(0,+editChildren.value || 0));
+
+        editAdults.value = adultsCount || "";
+        editChildren.value = childrenCount || "";
+
+        if(adultsCount < 1 && childrenCount < 1){
+            alert("Enter at least 1 adult or 1 child.");
+            return;
+        }
+
+    const raw = editSob.value.trim();
+
+    const sobNumber = normalizeSob(raw);
+
+if(!sobNumber){
+    alert("Enter valid 6-digit SOB ID!");
+    return;
+}
+
+const sob = "SOB000" + sobNumber;
+
+    if(data.some((row,index) =>
+        index !== editingIndex && row.sob === sob
+    )){
+        alert("This SOB ID already exists.");
+        return;
+    }
+
+    const comboValue = editCombo.value;
+    const comboName = editCombo.options[
+        editCombo.selectedIndex
+    ].text;
+
+    const values = comboValue.split(",");
+
+    const result = {
+        tpu:
+            adultsCount * (+values[0]) +
+            childrenCount * (+values[1]),
+
+        oepl:
+            (adultsCount + childrenCount) * (+values[2]),
+
+        paepl:
+            (adultsCount + childrenCount) * (+values[3])
+    };
+
+    result.total =
+        result.tpu +
+        result.oepl +
+        result.paepl;
+
+    const updatedRow = {
+        ...data[editingIndex],
+        sob,
+        comboName,
+        adults:adultsCount,
+        children:childrenCount,
+        ...result,
+        breakup:getVendorBreakup(
+            comboName,
+            adultsCount + childrenCount
+        ),
+        time:
+            `${editHour.value}:${editMinute.value} ` +
+            editAmPm.value
+    };
+
+    data[editingIndex] = updatedRow;
+    saveLocalData();
+    render();
+    closeEditModal();
+
+    try{
+        const response = await postToCloud({
+            action:"UPDATE",
+            date:todayString(),
+            ...updatedRow,
+            deviceId
+        });
+
+        setCloudStatus(
+            response.status === "success"
+                ? "success"
+                : "offline"
+        );
+    }catch(error){
+        setCloudStatus("offline");
+    }
+}
+
+function editEntry(index){
+    openEditModal(index);
+}
+
+function formatTime(value){
+    if(!value){
+        return "";
+    }
+
+    const match = String(value)
+        .match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+
+    if(match){
+        return `${match[1].padStart(2,"0")}:` +
+            `${match[2]} ${match[3].toUpperCase()}`;
+    }
+
+    const date = new Date(value);
+
+    if(!isNaN(date)){
+        return new Intl.DateTimeFormat("en-US",{
+            timeZone:"Asia/Kolkata",
+            hour:"2-digit",
+            minute:"2-digit",
+            hour12:true
+        }).format(date);
+    }
+
+    return String(value);
+}
+
+function parseActivities(rows){
+    const oeplActivities = {};
+    const paeplActivities = {};
+
+    rows.forEach(row => {
+        String(row.breakup || "")
+            .split("\n")
+            .forEach(line => {
+                const target = line.startsWith("OEPL")
+                    ? oeplActivities
+                    : line.startsWith("PAEPL")
+                        ? paeplActivities
+                        : null;
+
+                if(!target){
+                    return;
+                }
+
+                line.replace(/^(OEPL|PAEPL)\s*→/,"")
+                    .split("|")
+                    .forEach(activity => {
+                        const parts = activity.split(":");
+
+                        if(parts.length < 2){
+                            return;
+                        }
+
+                        const name = parts[0].trim();
+                        const amount = parseInt(parts[1]) || 0;
+
+                        target[name] =
+                            (target[name] || 0) + amount;
+                    });
+            });
+    });
+
+    return {oeplActivities,paeplActivities};
+}
+
+function formatActivities(activities){
+    return Object.entries(activities)
+        .map(([name,value]) => `${name}: ${value}`)
+        .join(" | ");
+}
+
+function render(){
+    const today = todayString();
+
+    data = data.filter(row =>
+        String(row.date || "").trim() === today
+    );
+
+    dataBody.innerHTML = "";
+
+    let tpuSum = 0;
+    let oeplSum = 0;
+    let paeplSum = 0;
+    let totalSum = 0;
+
+    data.forEach((row,index) => {
+        dataBody.innerHTML += `
+        <tr>
+            <td class="editColumn">
+                <button class="editBtn"
+                    onclick="editEntry(${index})">✏️</button>
+            </td>
+
+            <td class="deleteColumn">
+                <button class="deleteBtn"
+                    onclick="deleteEntry(${index})">🗑️</button>
+            </td>
+
+            <td>${index + 1}</td>
+
+            <td>
+                <b>${row.sob}</b><br>
+                <span style="font-size:9px;white-space:nowrap">
+                    (${(row.comboName || "")
+                        .match(/\d+\/(?:\d+|NA)/)?.[0] || ""})
+                    (${row.adults} A + ${row.children} C)
+                </span>
+            </td>
+
+            <td>${row.tpu}</td>
+            <td>${row.oepl}</td>
+            <td>${row.paepl}</td>
+            <td>${row.total}</td>
+
+            <td class="activityCell">
+                <pre>${row.breakup || "-"}</pre>
+            </td>
+
+            <td style="font-size:10px">
+                ${formatTime(row.time)}
+            </td>
+        </tr>`;
+
+        tpuSum += +row.tpu || 0;
+        oeplSum += +row.oepl || 0;
+        paeplSum += +row.paepl || 0;
+        totalSum += +row.total || 0;
+    });
+
+    const activities = parseActivities(data);
+
+    tpuT.innerHTML = `<b>${tpuSum}</b>`;
+    oeplT.innerHTML = `<b><u>${oeplSum}</u></b>`;
+    paeplT.innerHTML = `<b><u>${paeplSum}</u></b>`;
+    grandT.innerHTML = `<b>${totalSum}</b>`;
+
+    activityTotals.innerHTML =
+        `<u>OEPL</u> → ` +
+        `${formatActivities(activities.oeplActivities)}<br>` +
+        `<u>PAEPL</u> → ` +
+        `${formatActivities(activities.paeplActivities)}`;
+}
+
+async function printA4(){
+    const username = usernameInput.value.trim();
+
+    if(!username){
+        alert("Enter Username first.");
+        return;
+    }
+
+    usernameEl.textContent = username;
+    dateEl.textContent = todayString();
+    localStorage.setItem("username",username);
+
+    const today = todayString();
+
+    /*
+     * First synchronize today's user data from Google Sheets.
+     * Printing still uses the local data array after synchronization.
+     */
+    try{
+        setCloudStatus("syncing");
+
+        const response = await fetch(
+            APP_SCRIPT_URL +
+            "?date=" + encodeURIComponent(today) +
+            "&displayName=" + encodeURIComponent(username)
+        );
+
+        const cloudRows = await response.json();
+
+        if(cloudRows.status === "error"){
+            throw new Error(cloudRows.message || "Cloud loading failed.");
+        }
+
+        if(Array.isArray(cloudRows)){
+            const localRows = data.filter(row =>
+    String(row.date || "").trim() === today &&
+    String(row.displayName || "").trim().toLowerCase() ===
+    username.toLowerCase()
+);
+
+
+            const mergedRows = [...cloudRows];
+
+            const existingKeys = new Set(
+                mergedRows.map(row =>
+                    String(
+                        row.entryId ||
+                        `${row.displayName}|${row.sob}`
+                    ).trim()
+                )
+            );
+
+            /*
+             * Keep local entries that have not reached Google Sheets yet.
+             */
+            localRows.forEach(localRow => {
+                const key = String(
+                    localRow.entryId ||
+                    `${localRow.displayName}|${localRow.sob}`
+                ).trim();
+
+                if(!existingKeys.has(key)){
+                    mergedRows.push(localRow);
+                    existingKeys.add(key);
+                }
+            });
+
+            data = mergedRows.filter(row =>
+                String(row.date || "").trim() === today
+            );
+
+            saveLocalData();
+            render();
+            setCloudStatus("success");
+        }
+
+    }catch(error){
+        console.error("Unable to synchronize before printing:",error);
+        setCloudStatus("offline");
+
+        /*
+         * If the internet is unavailable, continue printing
+         * the already available local data.
+         */
+    }
+
+    /*
+     * Print the synchronized local data.
+     */
+    const originalData = data;
+
+    data = originalData.filter(row =>
+        String(row.date || "").trim() === today
+    );
+
+    render();
+
+    const restoreData = () => {
+        data = originalData;
+        render();
+        window.removeEventListener("afterprint",restoreData);
+    };
+
+    window.addEventListener("afterprint",restoreData);
+    window.print();
+}
+
+
+
+function getSelectedPrintUsers(){
+    const allCheckbox =
+        document.getElementById("printAllUsers");
+
+    const checkboxes = [
+        ...printUserList.querySelectorAll(".print-user-check")
+    ];
+
+    // Menu was never opened: print all users.
+    if(!allCheckbox && checkboxes.length === 0){
+        return null;
+    }
+
+    // ALL is selected: do not filter users.
+    if(allCheckbox && allCheckbox.checked){
+        return null;
+    }
+
+    return checkboxes
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
+}
+
+
+async function fetchUsersFromAppsScript(){
+    const localUsers = data
+        .map(row => String(row.displayName || "").trim())
+        .filter(Boolean);
+
+    try{
+        const response = await fetch(
+            APP_SCRIPT_URL +
+            "?date=" + encodeURIComponent(todayString()) +
+            "&all=true"
+        );
+
+        const cloudRows = await response.json();
+
+        const cloudUsers = Array.isArray(cloudRows)
+            ? cloudRows
+                .map(row =>
+                    String(row.displayName || "").trim()
+                )
+                .filter(Boolean)
+            : [];
+
+        return [...new Set([
+            ...localUsers,
+            ...cloudUsers
+        ])].sort((a,b) => a.localeCompare(b));
+
+    }catch(error){
+        console.error("Unable to fetch print users:",error);
+
+        return [...new Set(localUsers)]
+            .sort((a,b) => a.localeCompare(b));
+    }
+}
+
+
+function updatePrintButtonLabel(){
+    const selected = getSelectedPrintUsers();
+    const button = document.getElementById("allPrintBtn");
+
+    button.textContent =
+        selected && selected.length
+            ? `${selected.length} ▼`
+            : "ALL ▼";
+}
+
+function buildPrintMenu(users){
+    if(!users.length){
+        printUserList.innerHTML =
+            `<div style="font-size:12px">No users found.</div>`;
+        return;
+    }
+
+    printUserList.innerHTML = `
+        <label class="print-user-item">
+            <input type="checkbox" id="printAllUsers" checked>
+            <span><b>All</b></span>
+        </label>
+
+        <div style="border-top:1px solid var(--border);margin:6px 0"></div>
+
+        ${users.map(user => `
+            <label class="print-user-item">
+                <input type="checkbox"
+                       class="print-user-check"
+                       value="${user}"
+                       checked>
+                <span>${user}</span>
+            </label>
+        `).join("")}
+    `;
+
+    const allCheckbox =
+        document.getElementById("printAllUsers");
+
+    const checkboxes = [
+        ...printUserList.querySelectorAll(".print-user-check")
+    ];
+
+    allCheckbox.addEventListener("change",() => {
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = allCheckbox.checked;
+        });
+
+        updatePrintButtonLabel();
+    });
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change",() => {
+            allCheckbox.checked =
+                checkboxes.every(item => item.checked);
+
+            updatePrintButtonLabel();
+        });
+    });
+
+    updatePrintButtonLabel();
+}
+
+async function togglePrintMenu(event){
+    event.stopPropagation();
+
+    if(printMenu.classList.contains("show")){
+        printMenu.classList.remove("show");
+        return;
+    }
+
+    const users = await fetchUsersFromAppsScript();
+
+    buildPrintMenu(users);
+    printMenu.classList.add("show");
+}
+
+async function printSelectedUsers(){
+    const selectedUsers = getSelectedPrintUsers();
+
+    printMenu.classList.remove("show");
+
+    if(
+        Array.isArray(selectedUsers) &&
+        selectedUsers.length === 0
+    ){
+        alert("Please select at least one user.");
+        return;
+    }
+
+    // null means ALL users.
+    await printAllA4(selectedUsers);
+}
+
+
+function buildPrintablePage(rows,userName){
+    let tpuSum = 0;
+    let oeplSum = 0;
+    let paeplSum = 0;
+    let totalSum = 0;
+
+    const entries = rows.map((row,index) => {
+        tpuSum += +row.tpu || 0;
+        oeplSum += +row.oepl || 0;
+        paeplSum += +row.paepl || 0;
+        totalSum += +row.total || 0;
+
+        const comboCode = (row.comboName || "")
+            .match(/\d+\/(?:\d+|NA)/)?.[0] || "";
+
+        return `
+        <article class="printEntry">
+            <div class="entryMetrics">
+                <div><small>SR</small><b>${index + 1}</b></div>
+                <div class="entrySob"><small>SOB ID</small><b>${row.sob || ""}</b><span>${comboCode} · ${row.adults || 0} A + ${row.children || 0} C</span></div>
+                <div><small>TPU</small><b>${row.tpu || 0}</b></div>
+                <div><small>OEPL</small><b>${row.oepl || 0}</b></div>
+                <div><small>PAEPL</small><b>${row.paepl || 0}</b></div>
+                <div><small>TOTAL</small><b>${row.total || 0}</b></div>
+            </div>
+            <div class="entryDetails">
+                <b>ACTIVITIES' AMOUNTS</b>
+                <pre>${row.breakup || "-"}</pre>
+                <span class="entryTime"><b>TIME</b> ${formatTime(row.time)}</span>
+            </div>
+        </article>`;
+    }).join("");
+
+    return `
+    <section class="printUser">
+        <header class="printUserHeader">
+            <b>${userName || "Unknown"}</b>
+            <span>DATE: ${todayString()}</span>
+        </header>
+        ${entries}
+        <footer class="printUserTotals">
+            USER TOTAL — TPU: ${tpuSum} | OEPL: ${oeplSum} | PAEPL: ${paeplSum} | TOTAL: ${totalSum}
+        </footer>
+    </section>`;
+}
+
+function buildPrintablePage(rows,userName){
+    let tpuSum = 0;
+    let oeplSum = 0;
+    let paeplSum = 0;
+    let totalSum = 0;
+
+    const escapeHtml = value => String(value ?? "").replace(/[&<>\"]/g,char => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        "\"":"&quot;"
+    }[char]));
+
+    const entries = rows.map((row,index) => {
+        tpuSum += +row.tpu || 0;
+        oeplSum += +row.oepl || 0;
+        paeplSum += +row.paepl || 0;
+        totalSum += +row.total || 0;
+
+        const comboCode = (row.comboName || "")
+            .match(/\d+\/(?:\d+|NA)/)?.[0] || "";
+
+        return `
+            <tbody class="printEntryGroup">
+            <tr class="printMetricsRow">
+                <td>${index + 1}</td>
+                <td class="printSob"><b>${escapeHtml(row.sob || "")}</b><small>${escapeHtml(comboCode)} · ${escapeHtml(row.adults || 0)} A + ${escapeHtml(row.children || 0)} C</small></td>
+                <td>${escapeHtml(row.tpu || 0)}</td>
+                <td>${escapeHtml(row.oepl || 0)}</td>
+                <td>${escapeHtml(row.paepl || 0)}</td>
+                <td><b>${escapeHtml(row.total || 0)}</b></td>
+            </tr>
+            <tr class="printDetailsRow">
+                <td colspan="6">
+                    <div class="printDetailsInner">
+                        <div class="printActivity"><b>ACTIVITIES' AMOUNTS</b><pre>${escapeHtml(row.breakup || "-")}</pre></div>
+                        <div class="printTime"><b>TIME</b> ${escapeHtml(formatTime(row.time))}</div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>`;
+    }).join("");
+
+    return `
+        <section class="printUser">
+            <table class="printUserTable">
+                <thead>
+                    <tr class="printUserHeading"><th colspan="6"><div class="printHeadingInner"><span>USER: ${escapeHtml(userName || "Unknown")}</span><span>DATE: ${todayString()}</span></div></th></tr>
+                    <tr class="printColumnHeading"><th>SR</th><th>SOB ID</th><th>TPU</th><th>OEPL</th><th>PAEPL</th><th>TOTAL</th></tr>
+                </thead>
+                ${entries}
+                <tbody>
+                    <tr class="printUserTotal"><td colspan="2"><b>USER TOTAL</b></td><td><b>${tpuSum}</b></td><td><b>${oeplSum}</b></td><td><b>${paeplSum}</b></td><td><b>${totalSum}</b></td></tr>
+                </tbody>
+            </table>
+        </section>`;
+}
+
+function mergePrintRows(cloudRows){
+    const rows = Array.isArray(cloudRows)
+        ? [...cloudRows]
+        : [];
+
+    const existingKeys = new Set(
+        rows.map(row =>
+            String(
+                row.entryId ||
+                `${row.displayName}|${row.sob}`
+            ).trim()
+        )
+    );
+
+    /*
+     * Add locally saved rows that have not reached Google Sheets yet.
+     * This prevents unsynced local entries from disappearing from Print All.
+     */
+    data
+    .filter(localRow =>
+        String(localRow.date || "") === todayString()
+    )
+    .forEach(localRow => {
+        const key = String(
+            localRow.entryId ||
+            `${localRow.displayName}|${localRow.sob}`
+        ).trim();
+
+        if(!existingKeys.has(key)){
+            rows.push(localRow);
+            existingKeys.add(key);
+        }
+    });
+
+    return rows;
+}
+
+
+async function legacyPrintAllA4(selectedUsers = null){
+    try{
+        const response = await fetch(
+            APP_SCRIPT_URL +
+            "?date=" + encodeURIComponent(todayString()) +
+            "&all=true"
+        );
+
+        const cloudRows = await response.json();
+
+if(cloudRows.status === "error"){
+    alert(cloudRows.message);
+    return;
+}
+
+const rows = mergePrintRows(cloudRows).filter(row =>
+    String(row.date || "") === todayString()
+);
+
+        if(!Array.isArray(rows) || !rows.length){
+            alert("No entries found.");
+            return;
+        }
+
+        let filteredRows = rows;
+
+        if(Array.isArray(selectedUsers)){
+            const allowed = new Set(
+                selectedUsers.map(user =>
+                    user.trim().toLowerCase()
+                )
+            );
+
+            filteredRows = rows.filter(row =>
+                allowed.has(
+                    String(row.displayName || "Unknown")
+                        .trim()
+                        .toLowerCase()
+                )
+            );
+        }
+
+        if(!filteredRows.length){
+            alert("No selected users to print.");
+            return;
+        }
+
+        const grouped = {};
+
+        filteredRows.forEach(row => {
+            const name =
+                String(row.displayName || "Unknown").trim();
+
+            if(!grouped[name]){
+                grouped[name] = [];
+            }
+
+            grouped[name].push(row);
+        });
+
+        const html = Object.entries(grouped)
+            .map(([name,userRows]) =>
+                buildPrintablePage(userRows,name)
+            )
+            .join("");
+
+        const win = window.open("", "_blank");
+
+        if(!win){
+            alert("Popup blocked. Please allow popups.");
+            return;
+        }
+
+        const sharedCss = [...document.querySelectorAll("style")]
+            .map(style => style.textContent)
+            .join("\n");
+
+        win.document.open();
+
+        win.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Print All</title>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+${sharedCss}
+
+@page{
+    size:A4 landscape;
+    margin:8mm;
+}
+
+html,
+body{
+    margin:0!important;
+    padding:0!important;
+    width:100%!important;
+    background:#fff!important;
+    color:#000!important;
+    font-family:'Arimo',sans-serif!important;
+    overflow:visible!important;
+}
+
+.printUser{
+    width:100%;
+    break-inside:auto;
+    page-break-inside:auto;
+}
+
+.printUserHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:0 0 5px;
+    padding:0 0 3px;
+    border-bottom:1px solid #555;
+    font-size:10px;
+    break-after:avoid;
+    page-break-after:avoid;
+}
+
+.printEntry{
+    margin:0 0 5px;
+    padding:0 0 4px;
+    border-bottom:1px dashed #999;
+    break-inside:avoid;
+    page-break-inside:avoid;
+}
+
+.entryMetrics{
+    display:grid;
+    grid-template-columns:.35fr 1.8fr .65fr .7fr .8fr .8fr;
+    gap:3px;
+    align-items:start;
+    font-size:9px;
+}
+
+.entryMetrics > div{
+    min-width:0;
+}
+
+.entryMetrics small,
+.entryMetrics b{
+    display:block;
+}
+
+.entryMetrics small{
+    color:#444;
+    font-size:7px;
+}
+
+.entrySob b{
+    overflow-wrap:anywhere;
+}
+
+.entrySob span{
+    display:block;
+    font-size:7px;
+}
+
+.entryDetails{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:2px 8px;
+    margin-top:3px;
+    font-size:8px;
+}
+
+.entryDetails > b{
+    grid-column:1 / -1;
+    font-size:7px;
+}
+
+.entryDetails pre{
+    margin:0;
+    font:inherit;
+    line-height:1.2;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+.entryTime{
+    white-space:nowrap;
+    font-size:8px;
+}
+
+.printUserTotals{
+    margin:4px 0 8px;
+    padding-top:3px;
+    border-top:1px solid #555;
+    font-size:8px;
+    font-weight:bold;
+    break-inside:avoid;
+}
+
+.user-tear-line{
+    display:block!important;
+    margin:10px 0!important;
+    border:0!important;
+    border-top:1px dashed #777!important;
+    height:0!important;
+}
+
+.printSheet,
+.a4Page,
+.a4,
+.table-wrapper{
+    width:100%!important;
+    max-width:none!important;
+    height:auto!important;
+    margin:0!important;
+    overflow:visible!important;
+}
+
+.table-wrapper{
+    display:block!important;
+    overflow-x:visible!important;
+    overflow-y:visible!important;
+}
+
+.a4Page{
+    width:100%!important;
+    margin:0!important;
+    padding:0 0 10px!important;
+    page-break-after:auto!important;
+    break-after:auto!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid-page!important;
+}
+tr{
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+}
+
+.a4{
+    padding:0!important;
+}
+
+.header{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+    align-items:center!important;
+    width:100%!important;
+    margin-bottom:8px!important;
+    font-size:11px!important;
+    white-space:nowrap!important;
+}
+
+.header-left{
+    display:flex!important;
+}
+
+.header-center{
+    display:flex!important;
+    justify-content:center!important;
+    white-space:nowrap!important;
+}
+
+.header-right{
+    display:flex!important;
+    justify-content:flex-end!important;
+    white-space:nowrap!important;
+}
+
+.headerLine{
+    width:max-content!important;
+    min-width:100px!important;
+    max-width:none!important;
+    white-space:nowrap!important;
+}
+
+table{
+    width:100%!important;
+    min-width:0!important;
+    border-collapse:collapse!important;
+    font-size:10px!important;
+}
+
+th,
+td{
+    padding:3px!important;
+    border:1px solid #000!important;
+    color:#000!important;
+    background:#fff!important;
+}
+
+.activityCell{
+    font-size:9px!important;
+    padding:6px 6px 6px 12px!important;
+    white-space:normal!important;
+}
+
+.activityTotalsCell{
+    color:#000!important;
+    padding:6px 6px 6px 12px!important;
+    background:#eaeaea!important;
+}
+
+hr{
+    display:none!important;
+}
+
+.printUser{
+    width:100%;
+    margin:0 0 7mm;
+}
+
+.printUserTable{
+    width:100%!important;
+    min-width:0!important;
+    table-layout:fixed;
+    border-collapse:collapse;
+    font-size:10pt!important;
+}
+
+.printUserTable th,
+.printUserTable td{
+    border:1px solid #333!important;
+    padding:3px 5px!important;
+    color:#000!important;
+    background:#fff!important;
+    text-align:center;
+    vertical-align:middle;
+}
+
+.printUserHeading th{
+    border:0!important;
+    border-bottom:2px solid #222!important;
+    padding:4px 2px!important;
+    font-size:12pt;
+    text-align:left;
+}
+
+.printHeadingInner{
+    display:flex;
+    justify-content:space-between;
+}
+
+.printColumnHeading th{
+    background:#e8e8e8!important;
+    font-weight:bold;
+}
+
+.printEntryGroup,
+.printMetricsRow,
+.printDetailsRow,
+.printUserTotal{
+    break-inside:avoid;
+    page-break-inside:avoid;
+}
+
+.printMetricsRow td:first-child{
+    width:6%;
+}
+
+.printMetricsRow td:nth-child(2){
+    width:28%;
+    text-align:left;
+}
+
+.printSob small{
+    display:block;
+    font-size:8pt;
+}
+
+.printDetailsRow td{
+    text-align:left;
+}
+
+.printDetailsInner{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.printActivity{
+    flex:1;
+    min-width:0;
+}
+
+.printActivity b,
+.printTime b{
+    font-size:8pt;
+}
+
+.printActivity pre{
+    display:inline;
+    margin:0 0 0 6px;
+    font:inherit;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+.printTime{
+    white-space:nowrap;
+}
+
+.printUserTotal td{
+    background:#eee!important;
+}
+
+@media print{
+    @page{
+        size:A4 landscape;
+        margin:0;
+    }
+
+    html,
+    body{
+        width:100%;
+        height:auto;
+        margin:0!important;
+        padding:0!important;
+        overflow:visible!important;
+    }
+
+    .printAllFlow{
+        width:11.66in;
+        height:8.27in;
+        margin:0 auto;
+        column-count:2;
+        column-gap:0;
+        column-rule:1px dashed #555;
+        column-fill:auto;
+    }
+
+    .printUser{
+        width:5.83in!important;
+        margin:0!important;
+        break-inside:auto!important;
+        page-break-inside:auto!important;
+    }
+
+    .printUserTable{
+        width:100%!important;
+        min-width:0!important;
+        table-layout:fixed!important;
+        border-collapse:collapse!important;
+    }
+
+    .printEntryGroup,
+    .printMetricsRow,
+    .printDetailsRow{
+        break-inside:avoid!important;
+        page-break-inside:avoid!important;
+    }
+}
+</style>
+</head>
+
+<body>
+<main class="printAllFlow">${html}</main>
+</body>
+</html>
+        `);
+
+        win.document.close();
+
+        setTimeout(() => {
+            win.focus();
+            win.print();
+        },500);
+
+    }catch(error){
+        console.error("Print All failed:",error);
+        alert("Unable to print all users.");
+    }
+}
+
+
+
+async function printAllA4(selectedUsers = null){
+    try{
+        const response = await fetch(
+            APP_SCRIPT_URL +
+            "?date=" + encodeURIComponent(todayString()) +
+            "&all=true"
+        );
+        const cloudRows = await response.json();
+
+        if(cloudRows.status === "error"){
+            alert(cloudRows.message);
+            return;
+        }
+
+        let rows = mergePrintRows(cloudRows).filter(row =>
+            String(row.date || "").trim() === todayString()
+        );
+
+        if(Array.isArray(selectedUsers)){
+            const allowed = new Set(selectedUsers.map(user =>
+                String(user).trim().toLowerCase()
+            ));
+            rows = rows.filter(row =>
+                allowed.has(String(row.displayName || "Unknown")
+                    .trim().toLowerCase())
+            );
+        }
+
+        if(!rows.length){
+            alert("No entries found for the selected users.");
+            return;
+        }
+
+        const escapeHtml = value => String(value ?? "").replace(/[&<>\"]/g,char => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            "\"":"&quot;"
+        }[char]));
+
+        const grouped = new Map();
+        rows.forEach(row => {
+            const name = String(row.displayName || "Unknown").trim();
+            if(!grouped.has(name)) grouped.set(name,[]);
+            grouped.get(name).push(row);
+        });
+
+        const userTables = [...grouped.entries()].map(([name,userRows]) => {
+            let tpuSum = 0, oeplSum = 0, paeplSum = 0, totalSum = 0;
+            const entries = userRows.map((row,index) => {
+                tpuSum += +row.tpu || 0;
+                oeplSum += +row.oepl || 0;
+                paeplSum += +row.paepl || 0;
+                totalSum += +row.total || 0;
+                const comboCode = (row.comboName || "")
+                    .match(/\d+\/(?:\d+|NA)/)?.[0] || "";
+
+                return `<tr class="entryRow">
+                    <td>${index + 1}</td>
+                    <td class="sobCell"><b>${escapeHtml(row.sob || "")}</b><br><small>${escapeHtml(comboCode)} (${escapeHtml(row.adults || 0)} A + ${escapeHtml(row.children || 0)} C)</small></td>
+                    <td>${escapeHtml(row.tpu || 0)}</td>
+                    <td>${escapeHtml(row.oepl || 0)}</td>
+                    <td>${escapeHtml(row.paepl || 0)}</td>
+                    <td><b>${escapeHtml(row.total || 0)}</b></td>
+                    <td class="activityCell"><pre>${escapeHtml(row.breakup || "-")}</pre></td>
+                    <td class="timeCell">${escapeHtml(formatTime(row.time))}</td>
+                </tr>`;
+            }).join("");
+
+            const activities = parseActivities(userRows);
+            const activityTotalsText =
+                `OEPL → ${formatActivities(activities.oeplActivities)}\n` +
+                `PAEPL → ${formatActivities(activities.paeplActivities)}`;
+
+            return `<section class="printUser">
+                <table class="printUserTable">
+                    <thead>
+                        <tr><th class="userHeading" colspan="8"><span>USER: ${escapeHtml(name)}</span><span>DATE: ${todayString()}</span></th></tr>
+                        <tr class="columnHeading"><th>SR</th><th>SOB ID</th><th>TPU</th><th>OEPL</th><th>PAEPL</th><th>TOTAL</th><th>ACTIVITIES' AMOUNTS</th><th>TIME</th></tr>
+                    </thead>
+                    <tbody>
+                        ${entries}
+                        <tr class="userTotal"><td colspan="2"><b>TOTAL</b></td><td><b>${tpuSum}</b></td><td><b>${oeplSum}</b></td><td><b>${paeplSum}</b></td><td><b>${totalSum}</b></td><td class="activityTotalsCell"><pre>${escapeHtml(activityTotalsText)}</pre></td><td></td></tr>
+                    </tbody>
+                </table>
+            </section>`;
+        }).join("");
+
+        const win = window.open("", "_blank");
+        if(!win){
+            alert("Popup blocked. Please allow popups.");
+            return;
+        }
+
+        win.document.open();
+        win.document.write(`<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Print All</title>
+<style>
+@page{size:A4 landscape;margin:5mm;}
+*{box-sizing:border-box;font-family:Arial,sans-serif;}
+html,body{margin:0;padding:0;width:100%;color:#000;background:#fff;}
+.printAllFlow{width:100%;height:7.87in;column-count:2;column-gap:0;column-rule:1px dashed #555;column-fill:auto;}
+.printUser{width:100%;margin:0;break-inside:auto;page-break-inside:auto;}
+.printUserTable{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse;font-size:7pt;}
+.printUserTable th,.printUserTable td{border:1px solid #000;padding:2px 3px;text-align:center;vertical-align:middle;overflow-wrap:anywhere;}
+.printUserTable .userHeading{padding:3px 4px;border:0;border-bottom:1px solid #000;text-align:left;font-size:8pt;}
+.userHeading span:first-child{float:left;}.userHeading span:last-child{float:right;}
+.columnHeading th{background:#e8e8e8;font-size:6.5pt;}
+.printUserTable th:nth-child(1){width:5%;}.printUserTable th:nth-child(2){width:20%;}
+.printUserTable th:nth-child(3),.printUserTable th:nth-child(4),.printUserTable th:nth-child(5),.printUserTable th:nth-child(6){width:9%;}
+.printUserTable th:nth-child(7){width:30%;}.printUserTable th:nth-child(8){width:9%;}
+.entryRow,.userTotal{break-inside:avoid;page-break-inside:avoid;}
+.sobCell{white-space:normal;}.sobCell small{font-size:6pt;}
+.activityCell,.activityTotalsCell{text-align:left!important;vertical-align:top!important;font-size:6.5pt;}
+.activityCell pre,.activityTotalsCell pre{margin:0;font:inherit;line-height:1.15;white-space:pre-wrap;overflow-wrap:anywhere;}
+.timeCell{white-space:nowrap;font-size:6.5pt;}
+.userTotal{font-weight:bold;background:#eee;}
+@media print{html,body{width:100%;height:auto;overflow:visible;}.printAllFlow{height:7.87in;}}
+</style></head><body><main class="printAllFlow">${userTables}</main></body></html>`);
+        win.document.close();
+        setTimeout(() => {win.focus();win.print();},500);
+    }catch(error){
+        console.error("Print All failed:",error);
+        alert("Unable to print all users.");
+    }
+}
+
+function fullActivityName(name){
+    const names = {
+        Snow:"Snow Park (Shrinathji Ent)",
+        Food:"Food Court (Shrinathji Foods)",
+        Wax:"Wax Museum (Victory Fun Park)",
+        Souvenir:"Souvenir (Mayan Assts)",
+        Gamezone:"Gamezone (Saachi)",
+        Eyelusion:"Eyelusion (Rinz)",
+        Mayalok:"Mayalok (Divine)",
+        WOG:"World of Ganesha (Mahadev)"
+    };
+
+    return names[name] || name;
+}
+
+function getReceiptActivityLines(breakup){
+    const activityMap = {
+        OEPL:"",
+        PAEPL:""
+    };
+
+    String(breakup || "")
+        .split("\n")
+        .forEach(line => {
+            line = line.trim();
+
+            if(line.startsWith("OEPL")){
+                activityMap.OEPL =
+                    line.replace(/^OEPL\s*→/,"").trim();
+            }
+
+            if(line.startsWith("PAEPL")){
+                activityMap.PAEPL =
+                    line.replace(/^PAEPL\s*→/,"").trim();
+            }
+        });
+
+    let html = "";
+
+    if(activityMap.OEPL){
+        html += `<div>OEPL: ${activityMap.OEPL}</div>`;
+    }
+
+    if(activityMap.PAEPL){
+        html += `<div>PAEPL: ${activityMap.PAEPL}</div>`;
+    }
+
+    return html;
+}
+  
+function toggleTheme(){
+    const nextTheme = document.body.classList.contains("dark")
+        ? "light"
+        : "dark";
+
+    document.body.classList.toggle("dark",nextTheme === "dark");
+    localStorage.setItem("theme",nextTheme);
+    document.querySelector(".hiText").textContent =
+        nextTheme === "dark" ? "🌙 Hi," : "🌞 Hi,";
+}
+
+async function startScanner(){
+    scanLocked = false;
+    scannerOverlay.classList.add("show");
+
+    try{
+        if(qrScanner){
+            try{
+                await qrScanner.stop();
+            }catch(error){
+                console.warn("Previous scanner was not running:",error);
+            }
+
+            try{
+                await qrScanner.clear();
+            }catch(error){
+                console.warn("Previous scanner cleanup failed:",error);
+            }
+
+            qrScanner = null;
+        }
+
+        document.getElementById("reader").innerHTML = "";
+        await initScanner();
+
+    }catch(error){
+        console.error("Scanner initialization failed:",error);
+        alert("Camera could not start. Please allow camera permission and try again.");
+        await closeScanner();
+    }
+}
+async function initScanner(){
+    if(typeof Html5Qrcode === "undefined"){
+        throw new Error("QR scanner library is not loaded.");
+    }
+
+    qrScanner = new Html5Qrcode("reader");
+
+    await qrScanner.start(
+        {facingMode:"environment"},
+        {
+            fps:15
+        },
+        onScanSuccess,
+        () => {}
+    );
+
+    startLiveOcr();
+}
+
+async function getOcrWorker(){
+    await loadTesseract();
+
+    if(!ocrWorker){
+        ocrWorker = await Tesseract.createWorker("eng");
+    }
+
+    return ocrWorker;
+}
+
+function stopLiveOcr(){
+    if(ocrTimer){
+        clearInterval(ocrTimer);
+        ocrTimer = null;
+    }
+
+    ocrBusy = false;
+}
+
+async function scanCameraText(){
+    if(
+        scanLocked ||
+        ocrBusy ||
+        !qrScanner ||
+        !scannerOverlay.classList.contains("show")
+    ){
+        return;
+    }
+
+    const video = document.querySelector("#reader video");
+
+    if(
+        !video ||
+        video.readyState < 2 ||
+        !video.videoWidth ||
+        !video.videoHeight
+    ){
+        return;
+    }
+
+    ocrBusy = true;
+
+    try{
+        const canvas = document.createElement("canvas");
+        const maxWidth = 1000;
+        const scale = Math.min(1,maxWidth / video.videoWidth);
+
+        canvas.width = Math.round(video.videoWidth * scale);
+        canvas.height = Math.round(video.videoHeight * scale);
+
+        const context = canvas.getContext("2d",{
+            willReadFrequently:true
+        });
+
+        context.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        const worker = await getOcrWorker();
+        const result = await worker.recognize(canvas);
+
+        saveScannedValue(result.data.text);
+
+    }catch(error){
+        console.warn("Live OCR failed:",error);
+    }finally{
+        ocrBusy = false;
+    }
+}
+
+function startLiveOcr(){
+    stopLiveOcr();
+
+    /*
+     * OCR is intentionally throttled because running OCR on every
+     * camera frame makes mobile devices slow.
+     */
+    ocrTimer = setInterval(scanCameraText,1800);
+}
+async function closeScanner(){
+    stopLiveOcr();
+
+    if(qrScanner){
+        try{
+            await qrScanner.stop();
+        }catch(error){
+            console.warn("QR scanner stop failed:",error);
+        }
+
+        try{
+            await qrScanner.clear();
+        }catch(error){
+            console.warn("QR scanner clear failed:",error);
+        }
+
+        qrScanner = null;
+    }
+
+    document.getElementById("reader").innerHTML = "";
+    scannerOverlay.classList.remove("show");
+}
+
+function uploadQrImage(){
+    uploadQrInput.click();
+}
+
+function saveScannedValue(value){
+    if(scanLocked){
+        return false;
+    }
+
+    const sob = normalizeSob(value);
+
+    if(!sob){
+        return false;
+    }
+
+    scanLocked = true;
+    sobInput.value = sob;
+    closeScanner();
+
+    setTimeout(() => {
+        saveEntry();
+
+        setTimeout(() => {
+            scanLocked = false;
+        },500);
+    },200);
+
+    return true;
+}
+
+
+function onScanSuccess(decodedText){
+    saveScannedValue(decodedText);
+}
+
+
+function loadTesseract(){
+    return new Promise((resolve,reject) => {
+        if(window.Tesseract){
+            resolve();
+            return;
+        }
+
+        const script = document.createElement("script");
+
+        script.src =
+            "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+
+        script.onload = resolve;
+        script.onerror = reject;
+
+        document.head.appendChild(script);
+    });
+}
+
+async function handleQrUpload(event){
+    const input = event.target;
+    const file = input.files && input.files[0];
+
+    if(!file){
+        return;
+    }
+
+    scanLocked = false;
+    stopLiveOcr();
+
+    try{
+        /*
+         * Stop the live scanner before using scanFile().
+         */
+        if(qrScanner){
+            try{
+                await qrScanner.stop();
+            }catch(error){
+                console.warn("QR scanner stop failed:",error);
+            }
+
+            try{
+                await qrScanner.clear();
+            }catch(error){
+                console.warn("QR scanner clear failed:",error);
+            }
+
+            qrScanner = null;
+        }
+
+        let qrText = "";
+
+        /*
+         * scanFile() must be called on an Html5Qrcode instance.
+         */
+        try{
+            const fileScanner = new Html5Qrcode("reader");
+
+            qrText = await fileScanner.scanFile(file,true);
+
+            try{
+                await fileScanner.clear();
+            }catch(error){
+                console.warn("File scanner cleanup failed:",error);
+            }
+
+        }catch(error){
+            console.warn("No QR code found in image:",error);
+        }
+
+        if(saveScannedValue(qrText)){
+            return;
+        }
+
+        /*
+         * If QR scanning fails, use OCR on the uploaded image.
+         */
+        const worker = await getOcrWorker();
+        const result = await worker.recognize(file);
+
+        if(!saveScannedValue(result.data.text)){
+            alert(
+                "No valid SOB ID found. The image must contain " +
+                "a QR code or text in the format SOB000123456."
+            );
+        }
+
+    }catch(error){
+        console.error("Image QR/OCR scan failed:",error);
+        alert("Unable to read the uploaded image.");
+    }finally{
+        input.value = "";
+
+        if(scannerOverlay.classList.contains("show")){
+            startLiveOcr();
+        }
+    }
+}
+
+document.addEventListener("click",event => {
+    if(!event.target.closest(".print-all-wrap")){
+        printMenu.classList.remove("show");
+    }
+});
+
+window.addEventListener("offline",() =>
+    setCloudStatus("offline")
+);
+
+window.addEventListener("online",() =>
+    setCloudStatus("success")
+);
+
+function restoreFormState(){
+    const savedCombo = localStorage.getItem("lastCombo") || "";
+    combo.value = Array.from(combo.options)
+        .some(option => option.value === savedCombo)
+        ? savedCombo
+        : "";
+
+    adults.value =
+        localStorage.getItem("lastAdults") || "";
+
+    children.value =
+        localStorage.getItem("lastChildren") || "";
+
+    if(combo.value){
+        calc();
+    }
+}
+
+setEditTimeOptions();
+restoreFormState();
+
+const savedUsername =
+    localStorage.getItem("username") || "";
+
+usernameInput.value = savedUsername;
+usernameEl.textContent = savedUsername;
+dateEl.textContent = todayString();
+
+usernameInput.addEventListener("change",() => {
+    const username = usernameInput.value.trim();
+
+    if(!username){
+        data = [];
+        render();
+        return;
+    }
+
+    localStorage.setItem("username",username);
+    usernameEl.textContent = username;
+
+    loadUserLocalData();
+    render();
+});
+
+const savedTheme = localStorage.getItem("theme");
+
+if(savedTheme === "dark"){
+    document.body.classList.add("dark");
+}else{
+    document.body.classList.remove("dark","golden");
+}
+
+// Migrate previous golden-theme preference to the default light theme.
+if(savedTheme === "golden"){
+    localStorage.setItem("theme","light");
+}
+
+document.querySelector(".hiText").textContent =
+    savedTheme === "dark" ? "🌙 Hi," : "🌞 Hi,";
+loadUserLocalData();
+render();
+setCloudStatus(
+    navigator.onLine ? "success" : "offline"
+);
+</script>
+</body>
+</html>
