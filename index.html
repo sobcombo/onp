@@ -2399,10 +2399,10 @@ const rows = mergePrintRows(cloudRows).filter(row =>
         });
 
         const html = Object.entries(grouped)
-            .map(([name,userRows]) =>
-                buildPrintablePage(userRows,name)
-            )
-            .join("");
+    .map(([name,userRows]) =>
+        buildPrintablePage(userRows,name)
+    )
+    .join("");
 
         const win = window.open("", "_blank");
 
@@ -2427,7 +2427,10 @@ const rows = mergePrintRows(cloudRows).filter(row =>
 
 <style>
 ${sharedCss}
-
+@page {
+    size: A4 landscape;
+    margin: 6mm;
+}
 html,
 body{
     margin:0!important;
@@ -2437,6 +2440,37 @@ body{
     color:#000!important;
     font-family:'Arimo',sans-serif!important;
     overflow:visible!important;
+}
+/* Two A5-width columns on A4 landscape */
+.printFlow {
+    column-count: 2;
+    column-gap: 8mm;
+    column-rule: 1px dashed #777;
+    column-fill: auto;
+    height: 198mm;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Keep each user's report together when it fits in one A5 half */
+.printFlow .a4Page {
+    display: inline-block;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 0 10px !important;
+    padding: 0 0 4px !important;
+
+    -webkit-column-break-inside: avoid;
+    break-inside: avoid-column;
+    page-break-inside: avoid;
+}
+
+/* Preserve the original table's columns and formatting */
+.printFlow table {
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: auto;
 }
 .user-tear-line{
     display:block!important;
@@ -2541,14 +2575,20 @@ td{
     background:#eaeaea!important;
 }
 
-hr{
-    display:none!important;
+hr {
+    display: none !important;
+}
+
+hr.user-tear-line {
+    display: block !important;
 }
 </style>
 </head>
 
 <body>
-${html}
+    <div class="printFlow">
+        ${html}
+    </div>
 </body>
 </html>
         `);
