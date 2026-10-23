@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SOB coMboS calculator</title>
+<link rel="icon" type="image/png" href="20261021_011701.png">
 <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -582,20 +583,6 @@ body.dark .print-split button{
 }
 
 #reader{
-    width:100%;
-    height:100%;
-    min-height:0;
-}
-
-#reader video{
-    display:block;
-    width:100%!important;
-    height:100%!important;
-    min-height:100vh;
-    object-fit:cover;
-}
-
-#reader{
     position:relative;
     width:100%;
     height:100%;
@@ -619,11 +606,6 @@ body.dark .print-split button{
 #reader__scan_region{
     width:100%!important;
     height:100%!important;
-}
-
-@keyframes popIn{
-    from{transform:scale(.9);opacity:0}
-    to{transform:scale(1);opacity:1}
 }
 
 @media print{
@@ -835,468 +817,6 @@ body.dark .editCard::-webkit-scrollbar-thumb{
     }
 }
 
-/*
-body.golden input,
-body.golden select,
-body.golden .sobField,
-body.golden .box,
-body.golden .editCard,
-body.golden .print-dropdown{
-    color:#4a3514;
-    background-color:#ead39a;
-}
-
-body.golden input::placeholder{
-    color:#80642b;
-    opacity:1;
-}
-
-body.golden option{
-    color:#4a3514;
-    background:#ead39a;
-}
-
-body.golden .sobField input{
-    background:transparent;
-}
-
-body.golden .editField{
-    border-color:#b38a3d;
-}
-
-body.golden .editTitle{
-    color:#80642b;
-}
-
-body.golden .headerLine{
-    border-color:#80642b;
-}
-
-body.golden .highlight-total{
-    border-color:#b38a3d;
-    color:#4a3514;
-    background:#f0dda9;
-}
-
-body.golden table,
-body.golden th,
-body.golden td{
-    border-color:#b38a3d;
-    color:#4a3514;
-    background:#ead39a;
-}
-
-body.golden .activityTotalsCell{
-    background:#f0dda9;
-}
-
-body.golden #scanBtn{
-    border-left-color:#b38a3d;
-}
-
-body.golden .box,
-body.golden .editCard{
-    border-color:#b38a3d;
-}
-
-body.golden .print-dropdown{
-    border-color:#b38a3d;
-}
-
-body.golden .editField{
-    background-color:#f0dda9;
-    color:#4a3514;
-}
-
-body.golden .editField option{
-    background:#f0dda9;
-    color:#4a3514;
-}
-
-body.golden #scanBtn svg{
-    fill:#4a3514;
-}
-
-body.golden .activityTotalsCell{
-    color:#4a3514;
-}
-
-body.golden .headerLine{
-    color:#4a3514;
-}
-
-body.golden .highlight-total{
-    box-shadow:0 0 8px #d5ad51;
-    animation:none;
-}
-
-body.golden .print-user-item{
-    color:#4a3514;
-}
-
-body.golden .print-dropdown{
-    box-shadow:0 8px 20px #694b1640;
-}
-
-body.golden .editCard{
-    box-shadow:10px 14px 40px #694b1640;
-}
-
-body.golden .box{
-    box-shadow:8px 8px 20px #694b1630;
-}
-
-body.golden .sobField,
-body.golden input,
-body.golden select{
-    box-shadow:inset 2px 2px 5px #694b1614,4px 4px 10px #694b1620;
-}
-
-body.golden .sobField input{
-    box-shadow:none;
-}
-
-body.golden #scanBtn{
-    background:transparent;
-}
-
-body.golden .activityCell{
-    color:#4a3514;
-}
-
-body.golden .editTitle{
-    text-shadow:0 1px #f6e7bd;
-}
-
-body.golden .warning{
-    color:#7a321c;
-}
-
-body.golden .print-user-item input{
-    accent-color:#9a722b;
-}
-
-body.golden .headerLine{
-    border-bottom-color:#80642b;
-}
-
-body.golden hr{
-    border-color:#b38a3d;
-}
-
-body.golden .activityTotalsCell{
-    background:#e4c778;
-}
-
-body.golden th{
-    background:#dfc175;
-}
-
-body.golden input:focus,
-body.golden select:focus{
-    outline:2px solid #b38a3d;
-}
-
-body.golden .print-dropdown{
-    scrollbar-color:#b38a3d #ead39a;
-}
-
-body.golden .print-dropdown::-webkit-scrollbar-track{
-    background:#ead39a;
-}
-
-body.golden .print-dropdown::-webkit-scrollbar-thumb{
-    background:#b38a3d;
-    border-radius:10px;
-}
-
-body.golden .editCard{
-    scrollbar-color:#b38a3d #ead39a;
-}
-
-body.golden .editCard::-webkit-scrollbar-track{
-    background:#ead39a;
-}
-
-body.golden .editCard::-webkit-scrollbar-thumb{
-    background:#b38a3d;
-    border-radius:10px;
-}
-
-body.golden .table-wrapper{
-    scrollbar-color:#b38a3d #ead39a;
-}
-
-body.golden .table-wrapper::-webkit-scrollbar-track{
-    background:#ead39a;
-}
-
-body.golden .table-wrapper::-webkit-scrollbar-thumb{
-    background:#b38a3d;
-    border-radius:10px;
-}
-
-body.golden .headerLine,
-body.golden .headerText{
-    color:#4a3514;
-}
-
-body.golden .activityTotalsCell,
-body.golden .activityCell{
-    color:#4a3514;
-}
-
-body.golden .editField::placeholder{
-    color:#80642b;
-}
-
-body.golden .editTitle{
-    color:#80642b;
-}
-
-body.golden .print-dropdown{
-    color:#4a3514;
-}
-
-body.golden .table-wrapper{
-    background:#ead39a;
-}
-
-body.golden .headerLine{
-    background:transparent;
-}
-
-body.golden .sobField{
-    border:1px solid #b38a3d;
-}
-
-body.golden .box,
-body.golden .editCard{
-    border:1px solid #b38a3d;
-}
-
-body.golden .print-dropdown{
-    border:1px solid #b38a3d;
-}
-
-body.golden .highlight-total{
-    border:3px solid #b38a3d;
-}
-
-body.golden #scanBtn{
-    border-left:1px solid #b38a3d;
-}
-
-body.golden .editField{
-    border:2px solid #b38a3d;
-}
-
-body.golden .print-dropdown,
-body.golden .editCard{
-    color:#4a3514;
-}
-
-body.golden .activityTotalsCell{
-    font-weight:bold;
-}
-
-body.golden .table-wrapper::-webkit-scrollbar{
-    height:10px;
-}
-
-body.golden .print-dropdown::-webkit-scrollbar,
-body.golden .editCard::-webkit-scrollbar{
-    width:9px;
-}
-
-body.golden .editTitle{
-    text-shadow:none;
-}
-
-body.golden .highlight-total{
-    animation:none;
-}
-
-body.golden .box{
-    background:#ead39a;
-}
-
-body.golden .editCard{
-    background:#ead39a;
-}
-
-body.golden .print-dropdown{
-    background:#ead39a;
-}
-
-body.golden .sobField{
-    background:#ead39a;
-}
-
-body.golden input,
-body.golden select{
-    background-color:#f0dda9;
-}
-
-body.golden table,
-body.golden td{
-    background:#ead39a;
-}
-
-body.golden th{
-    background:#dfc175;
-}
-
-body.golden .activityTotalsCell{
-    background:#e4c778;
-}
-
-body.golden .headerLine{
-    border-bottom:1.5px solid #80642b;
-}
-
-body.golden #scanBtn svg{
-    fill:#4a3514;
-}
-
-body.golden .editTitle{
-    color:#80642b;
-}
-
-body.golden .print-user-item{
-    color:#4a3514;
-}
-
-body.golden .sobField input{
-    background:transparent;
-}
-
-body.golden .highlight-total{
-    color:#4a3514;
-    background:#f0dda9;
-}
-
-body.golden .editField{
-    color:#4a3514;
-}
-
-body.golden .header-right span{
-    color:#4a3514;
-}
-
-body.golden .footer-left{
-    color:#4a3514;
-}
-
-body.golden .hiText{
-    color:#4a3514;
-}
-
-body.golden .row{
-    color:#4a3514;
-}
-
-body.golden h2{
-    color:#4a3514;
-}
-
-body.golden .activityCell pre{
-    color:#4a3514;
-}
-
-body.golden .editCard div{
-    color:#4a3514;
-}
-
-body.golden .print-dropdown div{
-    color:#4a3514;
-}
-
-body.golden .editCard .saveBtn,
-body.golden .editCard .cancelBtn{
-    color:#fff;
-}
-
-body.golden .headerText{
-    color:#4a3514;
-}
-
-body.golden #cloudStatus{
-    color:inherit;
-}
-
-body.golden #warning{
-    color:#a3331e!important;
-}
-
-body.golden table{
-    border-color:#b38a3d;
-}
-
-body.golden th,
-body.golden td{
-    border-color:#b38a3d;
-}
-
-body.golden .editField{
-    border-color:#b38a3d;
-}
-
-body.golden .print-dropdown{
-    border-color:#b38a3d;
-}
-
-body.golden .sobField{
-    box-shadow:inset 2px 2px 5px #694b1614,4px 4px 10px #694b1620;
-}
-
-body.golden .box{
-    box-shadow:8px 8px 20px #694b1630;
-}
-
-body.golden .headerLine{
-    color:#4a3514;
-}
-
-body.golden .table-wrapper{
-    background:#ead39a;
-}
-
-body.golden .editModal{
-    background:#0008;
-}
-
-body.golden .activityTotalsCell{
-    background:#e4c778;
-}
-
-body.golden .print-split{
-    box-shadow:4px 4px 0 #bdbdbd,6px 8px 14px #0003;
-}
-
-body.golden .editActions button{
-    color:#fff;
-}
-
-body.golden .editTitle{
-    color:#80642b;
-}
-
-body.golden .headerLine{
-    border-color:#80642b;
-}
-
-body.golden .highlight-total{
-    border-color:#b38a3d;
-}
-
-body.golden table,
-body.golden th,
-body.golden td{
-    border-color:#b38a3d;
-}
-
-*/
 </style>
 </head>
 
@@ -1330,7 +850,7 @@ body.golden td{
     <option value="170,80,28,200">398/308&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Eco Fun Combo</option>
     <option value="170,80,255,0">425/335&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Snow Adventure Combo</option>
     <option value="470,400,0,100">570/500&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Aastha Combo</option>
-    <option value="170,0,0,529,NA">699/NA&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Adventure Combo</option>
+    <option value="170,170,0,529,NA">699/NA&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Adventure Combo</option>
     <option value="650,475,0,50">700/525&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Namah Combo</option>
     <option value="470,280,155,150">775/585&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Viewing Fun Combo</option>
     <option value="470,280,249,50">769/579&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Symbolic Play Combo</option>
@@ -1339,7 +859,7 @@ body.golden td{
     <option value="670,480,199,100">969/779&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Mini Blast Combo</option>
     <option value="450,275,200,450">1100/925&nbsp;&nbsp;:&nbsp;&nbsp;All In Fun Combo</option>
     <option value="1450,875,0,100">1550/975&nbsp;&nbsp;:&nbsp;&nbsp;Divine Rush Combo</option>
-    <option value="1500,300,449,2300,NA">4249/NA&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Ultimate Mega Combo</option>
+    <option value="1500,1500,449,2300,NA">4249/NA&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Ultimate Mega Combo</option>
 </select>
 
 <br>
@@ -1532,7 +1052,7 @@ body.golden td{
 </div>
 
 <div class="footer-left">
-    26J10 | V5.0 <span id="cloudStatus" title="Cloud status">☁️✅</span>
+    26J21 | V4.9 <span id="cloudStatus" title="Cloud status">☁️✅</span>
 </div>
 
 <div id="scannerOverlay" class="scannerOverlay">
@@ -1834,21 +1354,21 @@ function getVendorBreakup(comboName,pax){
 
     /* New October 2026 combos: grouped into the eight existing vendors. */
     const newBreakups = {
-        "Explorer Combo": `OEPL → Wax: ${40 * pax}\nPAEPL → Eyelusion: ${40 * pax} | WOK + WOG: ${49 * pax}`,
+        "Explorer Combo": `OEPL → Wax: ${40 * pax}\nPAEPL → Eyelusion: ${40 * pax} | WOG: ${49 * pax}`,
         "Eco Adventure Combo": `PAEPL → Gamezone: ${227 * pax}`,
         "Eco Fun Combo": `OEPL → Wax: ${28 * pax}\nPAEPL → Mayalok: ${200 * pax}`,
         "Snow Adventure Combo": `OEPL → Snow: ${255 * pax}`,
-        "Aastha Combo": `TPU → WOK + WOG: ${100 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${50 * pax}`,
+        "Aastha Combo": `PAEPL → Eyelusion: ${50 * pax} | Gamezone: ${50 * pax}`,
         "Adventure Combo": `PAEPL → Gamezone: ${529 * pax}`,
-        "Namah Combo": `TPU → WOK + WOG: ${100 * pax}\nPAEPL → Gamezone: ${50 * pax}`,
-        "Viewing Fun Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Food: ${45 * pax} | Souvenir: ${60 * pax} | Wax: ${50 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${100 * pax}`,
-        "Symbolic Play Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Snow: ${200 * pax} | Food: ${49 * pax}\nPAEPL → Gamezone: ${50 * pax}`,
-        "Ultimate Play Combo": `OEPL → Snow: ${199 * pax}\nPAEPL → Gamezone: ${250 * pax} | WOK + WOG: ${70 * pax} | Mayalok: ${200 * pax}`,
-        "Delight Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Food: ${45 * pax} | Souvenir: ${60 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${100 * pax} | Mayalok: ${200 * pax}`,
-        "Mini Blast Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Food: ${50 * pax} | Souvenir: ${99 * pax} | Wax: ${50 * pax}\nPAEPL → Gamezone: ${100 * pax}`,
-        "All in Fun Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Snow: ${200 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${200 * pax} | Mayalok: ${200 * pax}`,
-        "Divine Rush Combo": `TPU → WOK + WOG: ${100 * pax}\nPAEPL → Gamezone: ${100 * pax}`,
-        "Ultimate Mega Combo": `TPU → WOK + WOG: ${100 * pax}\nOEPL → Snow: ${150 * pax} | Food: ${99 * pax} | Souvenir: ${100 * pax} | Wax: ${100 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${750 * pax} | Mayalok: ${1500 * pax}`
+        "Namah Combo": `PAEPL → Gamezone: ${50 * pax}`,
+        "Viewing Fun Combo": `OEPL → Food: ${45 * pax} | Souvenir: ${60 * pax} | Wax: ${50 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${100 * pax}`,
+        "Symbolic Play Combo": `OEPL → Snow: ${200 * pax} | Food: ${49 * pax}\nPAEPL → Gamezone: ${50 * pax}`,
+        "Ultimate Play Combo": `OEPL → Snow: ${199 * pax}\nPAEPL → Gamezone: ${250 * pax} | WOG: ${70 * pax} | Mayalok: ${200 * pax}`,
+        "Delight Combo": `OEPL → Food: ${45 * pax} | Souvenir: ${60 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${200 * pax} | Mayalok: ${200 * pax}`,
+        "Mini Blast Combo": `OEPL → Food: ${50 * pax} | Souvenir: ${99 * pax} | Wax: ${50 * pax}`,
+        "All in Fun Combo": `OEPL → Snow: ${200 * pax}\nPAEPL → Gamezone: ${250 * pax} | Mayalok: ${200 * pax}`,
+        "Divine Rush Combo": `PAEPL → Gamezone: ${100 * pax}`,
+        "Ultimate Mega Combo": `OEPL → Snow: ${150 * pax} | Food: ${99 * pax} | Souvenir: ${100 * pax} | Wax: ${100 * pax}\nPAEPL → Eyelusion: ${50 * pax} | Gamezone: ${2100 * pax} | Mayalok: ${150 * pax}`
     };
 
     const newCombo = Object.keys(newBreakups)
@@ -1856,119 +1376,6 @@ function getVendorBreakup(comboName,pax){
 
     if(newCombo){
         return newBreakups[newCombo];
-    }
-
-    if(comboName.includes("snow adventure")){
-        return `OEPL → ${line([{name:"Snow",price:255}])}`;
-    }
-
-    if(comboName.includes("adventure combo")){
-        return `PAEPL → ${line([{name:"Gamezone",price:227}])}`;
-    }
-
-    if(comboName.includes("tu explorer")){
-        return `OEPL → ${line([{name:"Wax",price:70}])}
-PAEPL → ${line([
-    {name:"Eyelusion",price:70},
-    {name:"WOG",price:80}
-])}`;
-    }
-
-    if(comboName.includes("eco fun")){
-        return `OEPL → ${line([{name:"Wax",price:28}])}
-PAEPL → ${line([{name:"Mayalok",price:200}])}`;
-    }
-
-    if(comboName.includes("aastha")){
-        return `PAEPL → ${line([{name:"Gamezone",price:99}])}`;
-    }
-
-    if(comboName.includes("shiv ganesha")){
-        return `PAEPL → ${line([
-    {name:"Eyelusion",price:50},
-    {name:"Gamezone",price:50},
-    {name:"WOG",price:75}
-])}`;
-    }
-
-    if(comboName.includes("namah")){
-        return `PAEPL → ${line([{name:"Gamezone",price:50}])}`;
-    }
-
-    if(comboName.includes("ultimate play")){
-        return `PAEPL → ${line([{name:"Gamezone",price:529}])}`;
-    }
-
-    if(comboName.includes("viewing fun")){
-        return `OEPL → ${line([
-    {name:"Snow",price:225},
-    {name:"Food",price:100}
-])}
-PAEPL → ${line([{name:"Gamezone",price:50}])}`;
-    }
-
-    if(comboName.includes("symbolic")){
-        return `OEPL → ${line([
-    {name:"Snow",price:200},
-    {name:"Wax",price:49}
-])}
-PAEPL → ${line([
-    {name:"Gamezone",price:100},
-    {name:"WOG",price:70}
-])}`;
-    }
-
-    if(
-        comboName.includes("delight") ||
-        comboName.includes("mini blast")
-    ){
-        return `OEPL → ${line([
-    {name:"Snow",price:200},
-    {name:"Food",price:45},
-    {name:"Souvenir",price:60},
-    {name:"Wax",price:50}
-])}
-PAEPL → ${line([
-    {name:"Eyelusion",price:50},
-    {name:"Mayalok",price:200},
-    {name:"Gamezone",price:249},
-    {name:"WOG",price:75}
-])}`;
-    }
-
-    if(comboName.includes("all in fun")){
-        return `OEPL → ${line([
-    {name:"Snow",price:200},
-    {name:"Wax",price:50}
-])}
-PAEPL → ${line([
-    {name:"Eyelusion",price:50},
-    {name:"Mayalok",price:200},
-    {name:"Gamezone",price:279},
-    {name:"WOG",price:70}
-])}`;
-    }
-
-    if(comboName.includes("divine rush")){
-        return `PAEPL → ${line([
-    {name:"Gamezone",price:100},
-    {name:"WOG",price:50}
-])}`;
-    }
-
-    if(comboName.includes("ultimate mega")){
-        return `OEPL → ${line([
-    {name:"Snow",price:150},
-    {name:"Food",price:99},
-    {name:"Souvenir",price:100},
-    {name:"Wax",price:100}
-])}
-PAEPL → ${line([
-    {name:"Eyelusion",price:50},
-    {name:"Mayalok",price:150},
-    {name:"Gamezone",price:2100},
-    {name:"WOG",price:50}
-])}`;
     }
 
     return "-";
@@ -2803,103 +2210,94 @@ function buildPrintablePage(rows,userName){
     let oeplSum = 0;
     let paeplSum = 0;
     let totalSum = 0;
+    let htmlRows = "";
 
-    const entries = rows.map((row,index) => {
-        tpuSum += +row.tpu || 0;
-        oeplSum += +row.oepl || 0;
-        paeplSum += +row.paepl || 0;
-        totalSum += +row.total || 0;
-
-        const comboCode = (row.comboName || "")
-            .match(/\d+\/(?:\d+|NA)/)?.[0] || "";
-
-        return `
-        <article class="printEntry">
-            <div class="entryMetrics">
-                <div><small>SR</small><b>${index + 1}</b></div>
-                <div class="entrySob"><small>SOB ID</small><b>${row.sob || ""}</b><span>${comboCode} · ${row.adults || 0} A + ${row.children || 0} C</span></div>
-                <div><small>TPU</small><b>${row.tpu || 0}</b></div>
-                <div><small>OEPL</small><b>${row.oepl || 0}</b></div>
-                <div><small>PAEPL</small><b>${row.paepl || 0}</b></div>
-                <div><small>TOTAL</small><b>${row.total || 0}</b></div>
-            </div>
-            <div class="entryDetails">
-                <b>ACTIVITIES' AMOUNTS</b>
+    rows.forEach((row,index) => {
+        htmlRows += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>
+                <b>${row.sob || ""}</b><br>
+                <span style="font-size:9px;white-space:nowrap">
+                    (${(row.comboName || "")
+                        .match(/\d+\/(?:\d+|NA)/)?.[0] || ""})
+                    (${row.adults || 0} A + ${row.children || 0} C)
+                </span>
+            </td>
+            <td>${row.tpu || 0}</td>
+            <td>${row.oepl || 0}</td>
+            <td>${row.paepl || 0}</td>
+            <td>${row.total || 0}</td>
+            <td class="activityCell">
                 <pre>${row.breakup || "-"}</pre>
-                <span class="entryTime"><b>TIME</b> ${formatTime(row.time)}</span>
-            </div>
-        </article>`;
-    }).join("");
+            </td>
+            <td>${formatTime(row.time)}</td>
+        </tr>`;
 
-    return `
-    <section class="printUser">
-        <header class="printUserHeader">
-            <b>${userName || "Unknown"}</b>
-            <span>DATE: ${todayString()}</span>
-        </header>
-        ${entries}
-        <footer class="printUserTotals">
-            USER TOTAL — TPU: ${tpuSum} | OEPL: ${oeplSum} | PAEPL: ${paeplSum} | TOTAL: ${totalSum}
-        </footer>
-    </section>`;
-}
-
-function buildPrintablePage(rows,userName){
-    let tpuSum = 0;
-    let oeplSum = 0;
-    let paeplSum = 0;
-    let totalSum = 0;
-
-    const escapeHtml = value => String(value ?? "").replace(/[&<>\"]/g,char => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        "\"":"&quot;"
-    }[char]));
-
-    const entries = rows.map((row,index) => {
         tpuSum += +row.tpu || 0;
         oeplSum += +row.oepl || 0;
         paeplSum += +row.paepl || 0;
         totalSum += +row.total || 0;
+    });
 
-        const comboCode = (row.comboName || "")
-            .match(/\d+\/(?:\d+|NA)/)?.[0] || "";
-
-        return `
-            <tbody class="printEntryGroup">
-            <tr class="printMetricsRow">
-                <td>${index + 1}</td>
-                <td class="printSob"><b>${escapeHtml(row.sob || "")}</b><small>${escapeHtml(comboCode)} · ${escapeHtml(row.adults || 0)} A + ${escapeHtml(row.children || 0)} C</small></td>
-                <td>${escapeHtml(row.tpu || 0)}</td>
-                <td>${escapeHtml(row.oepl || 0)}</td>
-                <td>${escapeHtml(row.paepl || 0)}</td>
-                <td><b>${escapeHtml(row.total || 0)}</b></td>
-            </tr>
-            <tr class="printDetailsRow">
-                <td colspan="6">
-                    <div class="printDetailsInner">
-                        <div class="printActivity"><b>ACTIVITIES' AMOUNTS</b><pre>${escapeHtml(row.breakup || "-")}</pre></div>
-                        <div class="printTime"><b>TIME</b> ${escapeHtml(formatTime(row.time))}</div>
-                    </div>
-                </td>
-            </tr>
-            </tbody>`;
-    }).join("");
+    const activities = parseActivities(rows);
 
     return `
-        <section class="printUser">
-            <table class="printUserTable">
-                <thead>
-                    <tr class="printUserHeading"><th colspan="6"><div class="printHeadingInner"><span>USER: ${escapeHtml(userName || "Unknown")}</span><span>DATE: ${todayString()}</span></div></th></tr>
-                    <tr class="printColumnHeading"><th>SR</th><th>SOB ID</th><th>TPU</th><th>OEPL</th><th>PAEPL</th><th>TOTAL</th></tr>
-                </thead>
-                ${entries}
-                <tbody>
-                    <tr class="printUserTotal"><td colspan="2"><b>USER TOTAL</b></td><td><b>${tpuSum}</b></td><td><b>${oeplSum}</b></td><td><b>${paeplSum}</b></td><td><b>${totalSum}</b></td></tr>
-                </tbody>
-            </table>
-        </section>`;
+    <div class="a4Page">
+        <div class="header">
+            <div class="header-left"></div>
+
+            <div class="header-center">
+                <span>USERNA<b>M</b>E.<b>S</b> :</span>
+                <span class="headerLine">
+                    <b>${userName || ""}</b>
+                </span>
+            </div>
+
+            <div class="header-right">
+                <b>DATE :</b>
+                <span>${todayString()}</span>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>SR</th>
+                    <th>SOB ID</th>
+                    <th>TPU</th>
+                    <th>OEPL</th>
+                    <th>PAEPL</th>
+                    <th>TOTAL</th>
+                    <th>ACTIVITIES' AMOUNTS</th>
+                    <th>TIME</th>
+                </tr>
+            </thead>
+
+            <tbody>${htmlRows}</tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="2"><b>TOTAL</b></td>
+                    <td><b>${tpuSum}</b></td>
+                    <td><b><u>${oeplSum}</u></b></td>
+                    <td><b><u>${paeplSum}</u></b></td>
+                    <td><b>${totalSum}</b></td>
+                    <td class="activityTotalsCell">
+                        <u>OEPL</u> →
+                        ${formatActivities(activities.oeplActivities)}
+                        <br>
+                        <u>PAEPL</u> →
+                        ${formatActivities(activities.paeplActivities)}
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+<hr class="user-tear-line">
+
+        <hr style="border:1px dashed #999;margin:12px 0">
+    </div>`;
 }
 
 function mergePrintRows(cloudRows){
@@ -2940,7 +2338,7 @@ function mergePrintRows(cloudRows){
 }
 
 
-async function legacyPrintAllA4(selectedUsers = null){
+async function printAllA4(selectedUsers = null){
     try{
         const response = await fetch(
             APP_SCRIPT_URL +
@@ -3030,11 +2428,6 @@ const rows = mergePrintRows(cloudRows).filter(row =>
 <style>
 ${sharedCss}
 
-@page{
-    size:A4 landscape;
-    margin:8mm;
-}
-
 html,
 body{
     margin:0!important;
@@ -3045,99 +2438,6 @@ body{
     font-family:'Arimo',sans-serif!important;
     overflow:visible!important;
 }
-
-.printUser{
-    width:100%;
-    break-inside:auto;
-    page-break-inside:auto;
-}
-
-.printUserHeader{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:0 0 5px;
-    padding:0 0 3px;
-    border-bottom:1px solid #555;
-    font-size:10px;
-    break-after:avoid;
-    page-break-after:avoid;
-}
-
-.printEntry{
-    margin:0 0 5px;
-    padding:0 0 4px;
-    border-bottom:1px dashed #999;
-    break-inside:avoid;
-    page-break-inside:avoid;
-}
-
-.entryMetrics{
-    display:grid;
-    grid-template-columns:.35fr 1.8fr .65fr .7fr .8fr .8fr;
-    gap:3px;
-    align-items:start;
-    font-size:9px;
-}
-
-.entryMetrics > div{
-    min-width:0;
-}
-
-.entryMetrics small,
-.entryMetrics b{
-    display:block;
-}
-
-.entryMetrics small{
-    color:#444;
-    font-size:7px;
-}
-
-.entrySob b{
-    overflow-wrap:anywhere;
-}
-
-.entrySob span{
-    display:block;
-    font-size:7px;
-}
-
-.entryDetails{
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:2px 8px;
-    margin-top:3px;
-    font-size:8px;
-}
-
-.entryDetails > b{
-    grid-column:1 / -1;
-    font-size:7px;
-}
-
-.entryDetails pre{
-    margin:0;
-    font:inherit;
-    line-height:1.2;
-    white-space:pre-wrap;
-    overflow-wrap:anywhere;
-}
-
-.entryTime{
-    white-space:nowrap;
-    font-size:8px;
-}
-
-.printUserTotals{
-    margin:4px 0 8px;
-    padding-top:3px;
-    border-top:1px solid #555;
-    font-size:8px;
-    font-weight:bold;
-    break-inside:avoid;
-}
-
 .user-tear-line{
     display:block!important;
     margin:10px 0!important;
@@ -3244,157 +2544,11 @@ td{
 hr{
     display:none!important;
 }
-
-.printUser{
-    width:100%;
-    margin:0 0 7mm;
-}
-
-.printUserTable{
-    width:100%!important;
-    min-width:0!important;
-    table-layout:fixed;
-    border-collapse:collapse;
-    font-size:10pt!important;
-}
-
-.printUserTable th,
-.printUserTable td{
-    border:1px solid #333!important;
-    padding:3px 5px!important;
-    color:#000!important;
-    background:#fff!important;
-    text-align:center;
-    vertical-align:middle;
-}
-
-.printUserHeading th{
-    border:0!important;
-    border-bottom:2px solid #222!important;
-    padding:4px 2px!important;
-    font-size:12pt;
-    text-align:left;
-}
-
-.printHeadingInner{
-    display:flex;
-    justify-content:space-between;
-}
-
-.printColumnHeading th{
-    background:#e8e8e8!important;
-    font-weight:bold;
-}
-
-.printEntryGroup,
-.printMetricsRow,
-.printDetailsRow,
-.printUserTotal{
-    break-inside:avoid;
-    page-break-inside:avoid;
-}
-
-.printMetricsRow td:first-child{
-    width:6%;
-}
-
-.printMetricsRow td:nth-child(2){
-    width:28%;
-    text-align:left;
-}
-
-.printSob small{
-    display:block;
-    font-size:8pt;
-}
-
-.printDetailsRow td{
-    text-align:left;
-}
-
-.printDetailsInner{
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-}
-
-.printActivity{
-    flex:1;
-    min-width:0;
-}
-
-.printActivity b,
-.printTime b{
-    font-size:8pt;
-}
-
-.printActivity pre{
-    display:inline;
-    margin:0 0 0 6px;
-    font:inherit;
-    white-space:pre-wrap;
-    overflow-wrap:anywhere;
-}
-
-.printTime{
-    white-space:nowrap;
-}
-
-.printUserTotal td{
-    background:#eee!important;
-}
-
-@media print{
-    @page{
-        size:A4 landscape;
-        margin:0;
-    }
-
-    html,
-    body{
-        width:100%;
-        height:auto;
-        margin:0!important;
-        padding:0!important;
-        overflow:visible!important;
-    }
-
-    .printAllFlow{
-        width:11.66in;
-        height:8.27in;
-        margin:0 auto;
-        column-count:2;
-        column-gap:0;
-        column-rule:1px dashed #555;
-        column-fill:auto;
-    }
-
-    .printUser{
-        width:5.83in!important;
-        margin:0!important;
-        break-inside:auto!important;
-        page-break-inside:auto!important;
-    }
-
-    .printUserTable{
-        width:100%!important;
-        min-width:0!important;
-        table-layout:fixed!important;
-        border-collapse:collapse!important;
-    }
-
-    .printEntryGroup,
-    .printMetricsRow,
-    .printDetailsRow{
-        break-inside:avoid!important;
-        page-break-inside:avoid!important;
-    }
-}
 </style>
 </head>
 
 <body>
-<main class="printAllFlow">${html}</main>
+${html}
 </body>
 </html>
         `);
@@ -3413,133 +2567,6 @@ hr{
 }
 
 
-
-async function printAllA4(selectedUsers = null){
-    try{
-        const response = await fetch(
-            APP_SCRIPT_URL +
-            "?date=" + encodeURIComponent(todayString()) +
-            "&all=true"
-        );
-        const cloudRows = await response.json();
-
-        if(cloudRows.status === "error"){
-            alert(cloudRows.message);
-            return;
-        }
-
-        let rows = mergePrintRows(cloudRows).filter(row =>
-            String(row.date || "").trim() === todayString()
-        );
-
-        if(Array.isArray(selectedUsers)){
-            const allowed = new Set(selectedUsers.map(user =>
-                String(user).trim().toLowerCase()
-            ));
-            rows = rows.filter(row =>
-                allowed.has(String(row.displayName || "Unknown")
-                    .trim().toLowerCase())
-            );
-        }
-
-        if(!rows.length){
-            alert("No entries found for the selected users.");
-            return;
-        }
-
-        const escapeHtml = value => String(value ?? "").replace(/[&<>\"]/g,char => ({
-            "&":"&amp;",
-            "<":"&lt;",
-            ">":"&gt;",
-            "\"":"&quot;"
-        }[char]));
-
-        const grouped = new Map();
-        rows.forEach(row => {
-            const name = String(row.displayName || "Unknown").trim();
-            if(!grouped.has(name)) grouped.set(name,[]);
-            grouped.get(name).push(row);
-        });
-
-        const userTables = [...grouped.entries()].map(([name,userRows]) => {
-            let tpuSum = 0, oeplSum = 0, paeplSum = 0, totalSum = 0;
-            const entries = userRows.map((row,index) => {
-                tpuSum += +row.tpu || 0;
-                oeplSum += +row.oepl || 0;
-                paeplSum += +row.paepl || 0;
-                totalSum += +row.total || 0;
-                const comboCode = (row.comboName || "")
-                    .match(/\d+\/(?:\d+|NA)/)?.[0] || "";
-
-                return `<tr class="entryRow">
-                    <td>${index + 1}</td>
-                    <td class="sobCell"><b>${escapeHtml(row.sob || "")}</b><br><small>${escapeHtml(comboCode)} (${escapeHtml(row.adults || 0)} A + ${escapeHtml(row.children || 0)} C)</small></td>
-                    <td>${escapeHtml(row.tpu || 0)}</td>
-                    <td>${escapeHtml(row.oepl || 0)}</td>
-                    <td>${escapeHtml(row.paepl || 0)}</td>
-                    <td><b>${escapeHtml(row.total || 0)}</b></td>
-                    <td class="activityCell"><pre>${escapeHtml(row.breakup || "-")}</pre></td>
-                    <td class="timeCell">${escapeHtml(formatTime(row.time))}</td>
-                </tr>`;
-            }).join("");
-
-            const activities = parseActivities(userRows);
-            const activityTotalsText =
-                `OEPL → ${formatActivities(activities.oeplActivities)}\n` +
-                `PAEPL → ${formatActivities(activities.paeplActivities)}`;
-
-            return `<section class="printUser">
-                <table class="printUserTable">
-                    <thead>
-                        <tr><th class="userHeading" colspan="8"><span>USER: ${escapeHtml(name)}</span><span>DATE: ${todayString()}</span></th></tr>
-                        <tr class="columnHeading"><th>SR</th><th>SOB ID</th><th>TPU</th><th>OEPL</th><th>PAEPL</th><th>TOTAL</th><th>ACTIVITIES' AMOUNTS</th><th>TIME</th></tr>
-                    </thead>
-                    <tbody>
-                        ${entries}
-                        <tr class="userTotal"><td colspan="2"><b>TOTAL</b></td><td><b>${tpuSum}</b></td><td><b>${oeplSum}</b></td><td><b>${paeplSum}</b></td><td><b>${totalSum}</b></td><td class="activityTotalsCell"><pre>${escapeHtml(activityTotalsText)}</pre></td><td></td></tr>
-                    </tbody>
-                </table>
-            </section>`;
-        }).join("");
-
-        const win = window.open("", "_blank");
-        if(!win){
-            alert("Popup blocked. Please allow popups.");
-            return;
-        }
-
-        win.document.open();
-        win.document.write(`<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Print All</title>
-<style>
-@page{size:A4 landscape;margin:5mm;}
-*{box-sizing:border-box;font-family:Arial,sans-serif;}
-html,body{margin:0;padding:0;width:100%;color:#000;background:#fff;}
-.printAllFlow{width:100%;height:7.87in;column-count:2;column-gap:0;column-rule:1px dashed #555;column-fill:auto;}
-.printUser{width:100%;margin:0;break-inside:auto;page-break-inside:auto;}
-.printUserTable{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse;font-size:7pt;}
-.printUserTable th,.printUserTable td{border:1px solid #000;padding:2px 3px;text-align:center;vertical-align:middle;overflow-wrap:anywhere;}
-.printUserTable .userHeading{padding:3px 4px;border:0;border-bottom:1px solid #000;text-align:left;font-size:8pt;}
-.userHeading span:first-child{float:left;}.userHeading span:last-child{float:right;}
-.columnHeading th{background:#e8e8e8;font-size:6.5pt;}
-.printUserTable th:nth-child(1){width:5%;}.printUserTable th:nth-child(2){width:20%;}
-.printUserTable th:nth-child(3),.printUserTable th:nth-child(4),.printUserTable th:nth-child(5),.printUserTable th:nth-child(6){width:9%;}
-.printUserTable th:nth-child(7){width:30%;}.printUserTable th:nth-child(8){width:9%;}
-.entryRow,.userTotal{break-inside:avoid;page-break-inside:avoid;}
-.sobCell{white-space:normal;}.sobCell small{font-size:6pt;}
-.activityCell,.activityTotalsCell{text-align:left!important;vertical-align:top!important;font-size:6.5pt;}
-.activityCell pre,.activityTotalsCell pre{margin:0;font:inherit;line-height:1.15;white-space:pre-wrap;overflow-wrap:anywhere;}
-.timeCell{white-space:nowrap;font-size:6.5pt;}
-.userTotal{font-weight:bold;background:#eee;}
-@media print{html,body{width:100%;height:auto;overflow:visible;}.printAllFlow{height:7.87in;}}
-</style></head><body><main class="printAllFlow">${userTables}</main></body></html>`);
-        win.document.close();
-        setTimeout(() => {win.focus();win.print();},500);
-    }catch(error){
-        console.error("Print All failed:",error);
-        alert("Unable to print all users.");
-    }
-}
 
 function fullActivityName(name){
     const names = {
@@ -3952,19 +2979,12 @@ usernameInput.addEventListener("change",() => {
 
 const savedTheme = localStorage.getItem("theme");
 
-if(savedTheme === "dark"){
-    document.body.classList.add("dark");
-}else{
-    document.body.classList.remove("dark","golden");
-}
-
-// Migrate previous golden-theme preference to the default light theme.
-if(savedTheme === "golden"){
-    localStorage.setItem("theme","light");
-}
+document.body.classList.toggle("dark", savedTheme === "dark");
 
 document.querySelector(".hiText").textContent =
     savedTheme === "dark" ? "🌙 Hi," : "🌞 Hi,";
+
+
 loadUserLocalData();
 render();
 setCloudStatus(
