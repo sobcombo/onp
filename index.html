@@ -104,6 +104,241 @@ body.dark{
     box-shadow:4px 4px 0 #0b3a82,6px 8px 14px #0003;
 }
 
+#ultimateLockBtn{
+    display:grid;
+    place-items:center;
+    width:30px;
+    height:34px;
+    margin:0 0 0 2px;
+    padding:0;
+    border:0;
+    border-radius:0;
+    color:var(--text);
+    background:transparent;
+    box-shadow:none;
+}
+
+#ultimateLockBtn:hover,
+#ultimateLockBtn:active{
+    background:transparent;
+    box-shadow:none;
+    transform:none;
+}
+
+#ultimateLockBtn svg{
+    width:22px;
+    height:22px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+body.dark #ultimateLockBtn{
+    color:#f2f2f2;
+}
+
+.passwordModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:10001;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:#0009;
+    backdrop-filter:blur(5px);
+}
+
+.passwordModal.show{display:flex}
+
+.passwordCard{
+    width:min(340px,100%);
+    padding:24px;
+    border:1px solid #ffffff88;
+    border-radius:20px;
+    background:var(--card);
+    color:var(--text);
+    box-shadow:0 18px 55px #0006;
+}
+
+.passwordCard h3{margin:0 0 8px}
+.passwordCard input{width:100%;margin:12px 0}
+
+ .ultimate-mode{
+    --text:#e8edf2;
+    --card:#1c252d;
+    --input:#111920;
+    --table:#151d24;
+    --border:#34434e;
+    color:var(--text);
+    background:linear-gradient(145deg,#202a33,#11181e 62%,#0d1318)!important;
+}
+
+.ultimate-mode .top-buttons{display:none}
+.ultimate-mode .hiText{display:none}
+.ultimate-mode .box,
+.ultimate-mode .editCard,
+.ultimate-mode .print-dropdown{
+    border:1px solid #35444e;
+    background:#1b252d;
+    box-shadow:0 10px 24px #0007;
+}
+
+.ultimate-mode button:not(.saveBtn):not(.cancelBtn):not(#ultimateLockBtn){
+    color:#f2f6f8!important;
+    background:linear-gradient(135deg,#3b5564,#247b83)!important;
+    box-shadow:0 3px 8px #0006!important;
+}
+
+.ultimate-mode #ultimateLockBtn{color:#dce7f2}
+
+.ultimate-mode input,
+.ultimate-mode select{
+    border:1px solid #3a4b55;
+    background-color:#111920;
+    color:#e8edf2;
+}
+
+.ultimate-mode .highlight-total{
+    border-color:#48b9b0;
+    background:#183034;
+    color:#fff;
+    animation:none;
+}
+
+.comboControl,
+.paxFields{display:contents}
+.comboStep,
+.ultimateComboToggle,
+.ultimateComboMenu{display:none}
+
+.ultimate-mode .comboControl{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    width:90%;
+    max-width:340px;
+    margin:0 auto;
+}
+
+.ultimate-mode .comboControl #combo{display:none}
+.ultimate-mode .comboStep{
+    display:inline-grid;
+    place-items:center;
+    flex:0 0 42px;
+    height:44px;
+    margin:0;
+    padding:0;
+    border-radius:12px;
+    font-size:25px;
+}
+.ultimate-mode .comboControl > .comboStep:first-child{order:2}
+.ultimate-mode .comboControl > .comboStep:last-of-type{order:3}
+.ultimate-mode .ultimateComboToggle{
+    display:block;
+    order:1;
+    flex:1;
+    min-width:0;
+    min-height:44px;
+    height:auto;
+    margin:0;
+    padding:6px 14px;
+    border-radius:12px;
+    text-align:left;
+    white-space:normal;
+    line-height:1.15;
+}
+.ultimate-mode .ultimateComboMenu{
+    position:absolute;
+    top:calc(100% + 5px);
+    left:48px;
+    right:48px;
+    z-index:10002;
+    max-height:45vh;
+    overflow:auto;
+    padding:5px;
+    border:1px solid #3a4b55;
+    border-radius:12px;
+    background:#172129;
+    box-shadow:0 10px 24px #0009;
+    text-align:left;
+}
+.ultimate-mode .ultimateComboMenu.show{display:block}
+.ultimate-mode .ultimateComboOption{
+    display:block;
+    width:100%;
+    margin:0;
+    padding:10px;
+    border-radius:8px;
+    box-shadow:none!important;
+    text-align:left;
+}
+.ultimate-mode .paxFields{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    width:90%;
+    max-width:340px;
+    margin:0 auto;
+}
+.ultimate-mode .paxFields input{
+    width:calc(50% - 4px);
+    min-width:0;
+    margin:8px 0;
+}
+.ultimate-mode .paxFields br{display:none}
+.ultimate-mode .print-split{box-shadow:0 3px 8px #0007}
+.ultimate-mode .print-split button{box-shadow:none!important}
+.ultimate-mode .print-print-btn{border-right:1px solid #50616a!important}
+.ultimate-mode .activityCell,
+.ultimate-mode .activityTotalsCell{background:#19242c;color:#e8edf2}
+
+body.ultimate-transform::before{
+    content:"";
+    position:fixed;
+    inset:10%;
+    z-index:100001;
+    border:5px solid #33d5f2;
+    border-radius:18px;
+    box-shadow:0 0 24px #33d5f2,0 0 80px #087da8;
+    pointer-events:none;
+    animation:ultimateRing 1.35s ease-out forwards;
+}
+
+@keyframes ultimateRing{
+    0%{opacity:0;transform:scale(.72);filter:brightness(2)}
+    35%{opacity:1;transform:scale(1);filter:brightness(1)}
+    100%{opacity:0;transform:scale(1.12);filter:brightness(1.5)}
+}
+
+body.ultimate-transform::after{
+    content:"ULTIMATE COMBO CALCULATOR";
+    position:fixed;
+    inset:0;
+    z-index:100000;
+    display:grid;
+    place-items:center;
+    padding:20px;
+    color:#e8faff;
+    font-size:clamp(22px,6vw,48px);
+    font-weight:bold;
+    letter-spacing:.06em;
+    text-shadow:0 0 10px #48ddff,0 0 30px #0784b5;
+    background:radial-gradient(circle,#14799acc 0%,#102943ee 42%,#060c16f5 78%);
+    pointer-events:none;
+    animation:ultimateReveal 1.35s ease-in-out forwards;
+}
+
+@keyframes ultimateReveal{
+    0%{opacity:0;transform:scale(.75);filter:blur(8px)}
+    40%{opacity:1;transform:scale(1);filter:blur(0)}
+    75%{opacity:1;transform:scale(1)}
+    100%{opacity:0;transform:scale(1.08);filter:blur(5px)}
+}
+
 input,
 select{
     width:90%;
@@ -838,11 +1073,30 @@ body.dark .editCard::-webkit-scrollbar-thumb{
     <span class="hiText" onclick="toggleTheme()">🌞 Hi,</span>
     <input id="usernameInput" type="text" placeholder="Enter Username" autocomplete="off">
     <button id="loadBtn" onclick="restoreTodayData()">Load</button>
+    <button id="ultimateLockBtn" onclick="toggleUltimateMode()" title="Unlock Ultimate Calculator" aria-label="Unlock Ultimate Calculator">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 10V7a5 5 0 0 1 10 0v3M6 10h12v11H6zM12 14v3"/>
+        </svg>
+    </button>
 </div>
 
 <h2>SOB coMboS calculator</h2>
 
-<select id="combo" onchange="calc()">
+<div id="passwordModal" class="passwordModal" role="dialog" aria-modal="true" aria-labelledby="passwordTitle">
+    <div class="passwordCard">
+        <h3 id="passwordTitle">🔒 Unlock Ultimate</h3>
+        <div>Enter the access password to transform the calculator.</div>
+        <input id="ultimatePassword" type="password" placeholder="Password" autocomplete="off">
+        <div>
+            <button onclick="unlockUltimate()">Unlock</button>
+            <button onclick="closeUltimateGate()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div class="comboControl">
+    <button type="button" class="comboStep" onclick="stepCombo(-1)" aria-label="Previous combo">‹</button>
+    <select id="combo" onchange="calc()">
     <option value="">Select Combo</option>
 
     <option value="170,80,40,89">299/209&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Explorer Combo</option>
@@ -860,17 +1114,21 @@ body.dark .editCard::-webkit-scrollbar-thumb{
     <option value="450,275,200,450">1100/925&nbsp;&nbsp;:&nbsp;&nbsp;All In Fun Combo</option>
     <option value="1450,875,0,100">1550/975&nbsp;&nbsp;:&nbsp;&nbsp;Divine Rush Combo</option>
     <option value="1500,1500,449,2300,NA">4249/NA&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Ultimate Mega Combo</option>
-</select>
+    </select>
+    <button type="button" id="ultimateComboToggle" class="ultimateComboToggle" onclick="toggleUltimateComboMenu()" aria-expanded="false">Select Combo ▾</button>
+    <button type="button" class="comboStep" onclick="stepCombo(1)" aria-label="Next combo">›</button>
+    <div id="ultimateComboMenu" class="ultimateComboMenu"></div>
+</div>
 
 <br>
 
-<input id="adults" type="tel" inputmode="numeric" maxlength="3"
-       placeholder="No. of Adults" oninput="limitPax(this);calc()">
-
-<br>
-
-<input id="children" type="tel" inputmode="numeric" maxlength="3"
-       placeholder="No. of Children" oninput="limitPax(this);calc()">
+<div class="paxFields">
+    <input id="adults" type="tel" inputmode="numeric" maxlength="3"
+           placeholder="No. of Adults" oninput="limitPax(this);calc()">
+    <br>
+    <input id="children" type="tel" inputmode="numeric" maxlength="3"
+           placeholder="No. of Children" oninput="limitPax(this);calc()">
+</div>
 
 <p id="warning" style="color:red"></p>
 
@@ -1052,7 +1310,7 @@ body.dark .editCard::-webkit-scrollbar-thumb{
 </div>
 
 <div class="footer-left">
-    26J21 | V4.9 <span id="cloudStatus" title="Cloud status">☁️✅</span>
+    26J21 | V5.0 <span id="cloudStatus" title="Cloud status">☁️✅</span>
 </div>
 
 <div id="scannerOverlay" class="scannerOverlay">
@@ -1302,7 +1560,74 @@ function normalizeSob(value){
 }
 
 
+function updateUltimateComboUi(){
+    const toggle = document.getElementById("ultimateComboToggle");
+    const menu = document.getElementById("ultimateComboMenu");
+
+    if(!toggle || !menu){
+        return;
+    }
+
+    const selected = combo.selectedOptions[0];
+    const label = selected && selected.value
+        ? selected.textContent.replace(/\s+/g," ").trim()
+        : "Select Combo";
+    toggle.textContent = label + " ▾";
+    toggle.title = label;
+
+    // Fit the complete combo name into the available button width.
+    let fontSize = 14;
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    const availableWidth = Math.max(80,toggle.clientWidth - 34);
+
+    if(context){
+        while(fontSize > 10){
+            context.font = `700 ${fontSize}px Arimo, sans-serif`;
+            if(context.measureText(label + " ▾").width <= availableWidth){
+                break;
+            }
+            fontSize--;
+        }
+    }
+    toggle.style.fontSize = `${fontSize}px`;
+
+    menu.innerHTML = "";
+
+    Array.from(combo.options).slice(1).forEach((option,index) => {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "ultimateComboOption";
+        item.textContent = option.textContent.trim();
+        item.addEventListener("click",() => {
+            combo.value = option.value;
+            menu.classList.remove("show");
+            toggle.setAttribute("aria-expanded","false");
+            calc();
+        });
+        menu.appendChild(item);
+    });
+}
+
+function toggleUltimateComboMenu(){
+    const menu = document.getElementById("ultimateComboMenu");
+    const toggle = document.getElementById("ultimateComboToggle");
+    const isOpen = menu.classList.toggle("show");
+    toggle.setAttribute("aria-expanded",String(isOpen));
+}
+
+function stepCombo(direction){
+    const lastOption = combo.options.length - 1;
+    const current = combo.selectedIndex;
+    combo.selectedIndex = Math.max(1,Math.min(lastOption,
+        (current < 1 ? (direction > 0 ? 0 : 2) : current) + direction
+    ));
+    calc();
+}
+
 function calc(){
+    updateUltimateComboUi();
+
     if(!combo.value){
         tpuEl.textContent = "0";
         oeplEl.textContent = "0";
@@ -2074,8 +2399,48 @@ function getSelectedPrintUsers(){
 }
 
 
+function normalizeCloudRows(payload){
+    if(Array.isArray(payload)){
+        return payload;
+    }
+
+    if(payload && Array.isArray(payload.rows)){
+        return payload.rows;
+    }
+
+    if(payload && Array.isArray(payload.data)){
+        return payload.data;
+    }
+
+    return [];
+}
+
+function getLocalRowsForToday(){
+    const rows = [...data];
+    const prefix = `sobData:${todayString()}:`;
+
+    for(let index = 0; index < localStorage.length; index++){
+        const key = localStorage.key(index);
+
+        if(!key || !key.startsWith(prefix)){
+            continue;
+        }
+
+        try{
+            const savedRows = JSON.parse(localStorage.getItem(key) || "[]");
+            if(Array.isArray(savedRows)) rows.push(...savedRows);
+        }catch(error){
+            console.warn("Unable to read local print data:",error);
+        }
+    }
+
+    return rows.filter(row =>
+        String(row.date || "").trim() === todayString()
+    );
+}
+
 async function fetchUsersFromAppsScript(){
-    const localUsers = data
+    const localUsers = getLocalRowsForToday()
         .map(row => String(row.displayName || "").trim())
         .filter(Boolean);
 
@@ -2086,15 +2451,11 @@ async function fetchUsersFromAppsScript(){
             "&all=true"
         );
 
-        const cloudRows = await response.json();
+        const cloudRows = normalizeCloudRows(await response.json());
 
-        const cloudUsers = Array.isArray(cloudRows)
-            ? cloudRows
-                .map(row =>
-                    String(row.displayName || "").trim()
-                )
-                .filter(Boolean)
-            : [];
+        const cloudUsers = cloudRows
+            .map(row => String(row.displayName || "").trim())
+            .filter(Boolean);
 
         return [...new Set([
             ...localUsers,
@@ -2205,7 +2566,7 @@ async function printSelectedUsers(){
 }
 
 
-function buildPrintablePage(rows,userName){
+function buildPrintablePage(rows,userName,ultimatePrintMode = false){
     let tpuSum = 0;
     let oeplSum = 0;
     let paeplSum = 0;
@@ -2213,24 +2574,38 @@ function buildPrintablePage(rows,userName){
     let htmlRows = "";
 
     rows.forEach((row,index) => {
-        htmlRows += `
-        <tr>
+        const comboInfo = `
+            <b>${row.sob || ""}</b><br>
+            <span class="comboInfo">
+                (${(row.comboName || "")
+                    .match(/\d+\/(?:\d+|NA)/)?.[0] || ""})
+                (${row.adults || 0} A + ${row.children || 0} C)
+            </span>`;
+
+        htmlRows += ultimatePrintMode
+            ? `
+        <tr class="ultimateEntryRow">
             <td>${index + 1}</td>
-            <td>
-                <b>${row.sob || ""}</b><br>
-                <span style="font-size:9px;white-space:nowrap">
-                    (${(row.comboName || "")
-                        .match(/\d+\/(?:\d+|NA)/)?.[0] || ""})
-                    (${row.adults || 0} A + ${row.children || 0} C)
-                </span>
-            </td>
+            <td>${comboInfo}</td>
             <td>${row.tpu || 0}</td>
             <td>${row.oepl || 0}</td>
             <td>${row.paepl || 0}</td>
             <td>${row.total || 0}</td>
-            <td class="activityCell">
-                <pre>${row.breakup || "-"}</pre>
-            </td>
+        </tr>
+        <tr class="ultimateDetailsRow">
+            <td></td>
+            <td colspan="4" class="activityCell"><pre>${row.breakup || "-"}</pre></td>
+            <td class="ultimateTimeCell">TIME: ${formatTime(row.time)}</td>
+        </tr>`
+            : `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${comboInfo}</td>
+            <td>${row.tpu || 0}</td>
+            <td>${row.oepl || 0}</td>
+            <td>${row.paepl || 0}</td>
+            <td>${row.total || 0}</td>
+            <td class="activityCell"><pre>${row.breakup || "-"}</pre></td>
             <td>${formatTime(row.time)}</td>
         </tr>`;
 
@@ -2241,92 +2616,85 @@ function buildPrintablePage(rows,userName){
     });
 
     const activities = parseActivities(rows);
+    const headers = ultimatePrintMode
+        ? `<th>SR</th><th>SOB ID</th><th>TPU</th><th>OEPL</th><th>PAEPL</th><th>TOTAL</th>`
+        : `<th>SR</th><th>SOB ID</th><th>TPU</th><th>OEPL</th><th>PAEPL</th><th>TOTAL</th><th>ACTIVITIES' AMOUNTS</th><th>TIME</th>`;
+    const totals = ultimatePrintMode
+        ? `<tr class="ultimateGrandTotals">
+                <td colspan="2"><b>TOTAL</b></td>
+                <td class="metricTotal tpuMetric"><b>${tpuSum}</b></td>
+                <td class="metricTotal oeplMetric"><b>${oeplSum}</b></td>
+                <td class="metricTotal paeplMetric"><b>${paeplSum}</b></td>
+                <td class="metricTotal grandMetric"><b>${totalSum}</b></td>
+            </tr>
+            <tr class="ultimateActivityTotals">
+                <td></td>
+                <td colspan="4" class="activityTotalsCell">
+                    <u>OEPL</u> → ${formatActivities(activities.oeplActivities)}<br>
+                    <u>PAEPL</u> → ${formatActivities(activities.paeplActivities)}
+                </td>
+                <td></td>
+            </tr>`
+        : `<tr>
+                <td colspan="2"><b>TOTAL</b></td>
+                <td><b>${tpuSum}</b></td>
+                <td><b><u>${oeplSum}</u></b></td>
+                <td><b><u>${paeplSum}</u></b></td>
+                <td><b>${totalSum}</b></td>
+                <td class="activityTotalsCell">
+                    <u>OEPL</u> → ${formatActivities(activities.oeplActivities)}<br>
+                    <u>PAEPL</u> → ${formatActivities(activities.paeplActivities)}
+                </td>
+                <td></td>
+            </tr>`;
 
     return `
     <div class="a4Page">
         <div class="header">
             <div class="header-left"></div>
-
             <div class="header-center">
                 <span>USERNA<b>M</b>E.<b>S</b> :</span>
-                <span class="headerLine">
-                    <b>${userName || ""}</b>
-                </span>
+                <span class="headerLine"><b>${userName || ""}</b></span>
             </div>
-
-            <div class="header-right">
-                <b>DATE :</b>
-                <span>${todayString()}</span>
-            </div>
+            <div class="header-right"><b>DATE :</b><span>${todayString()}</span></div>
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>SR</th>
-                    <th>SOB ID</th>
-                    <th>TPU</th>
-                    <th>OEPL</th>
-                    <th>PAEPL</th>
-                    <th>TOTAL</th>
-                    <th>ACTIVITIES' AMOUNTS</th>
-                    <th>TIME</th>
-                </tr>
-            </thead>
-
+        <table class="${ultimatePrintMode ? "ultimatePrintTable" : ""}">
+            <thead><tr>${headers}</tr></thead>
             <tbody>${htmlRows}</tbody>
-
-            <tfoot>
-                <tr>
-                    <td colspan="2"><b>TOTAL</b></td>
-                    <td><b>${tpuSum}</b></td>
-                    <td><b><u>${oeplSum}</u></b></td>
-                    <td><b><u>${paeplSum}</u></b></td>
-                    <td><b>${totalSum}</b></td>
-                    <td class="activityTotalsCell">
-                        <u>OEPL</u> →
-                        ${formatActivities(activities.oeplActivities)}
-                        <br>
-                        <u>PAEPL</u> →
-                        ${formatActivities(activities.paeplActivities)}
-                    </td>
-                    <td></td>
-                </tr>
-            </tfoot>
+            <tfoot>${totals}</tfoot>
         </table>
-<hr class="user-tear-line">
-
+        <hr class="user-tear-line">
         <hr style="border:1px dashed #999;margin:12px 0">
     </div>`;
 }
 
 function mergePrintRows(cloudRows){
-    const rows = Array.isArray(cloudRows)
-        ? [...cloudRows]
-        : [];
+    const rows = [];
+    const existingKeys = new Set();
 
-    const existingKeys = new Set(
-        rows.map(row =>
-            String(
-                row.entryId ||
-                `${row.displayName}|${row.sob}`
-            ).trim()
-        )
-    );
+    normalizeCloudRows(cloudRows).forEach(row => {
+        const key = String(
+            row.entryId ||
+            `${row.displayName}|${row.sob}`
+        ).trim().toLowerCase();
+
+        if(!existingKeys.has(key)){
+            rows.push(row);
+            existingKeys.add(key);
+        }
+    });
 
     /*
      * Add locally saved rows that have not reached Google Sheets yet.
      * This prevents unsynced local entries from disappearing from Print All.
      */
-    data
-    .filter(localRow =>
-        String(localRow.date || "") === todayString()
-    )
+    getLocalRowsForToday()
     .forEach(localRow => {
         const key = String(
             localRow.entryId ||
             `${localRow.displayName}|${localRow.sob}`
-        ).trim();
+        ).trim().toLowerCase();
 
         if(!existingKeys.has(key)){
             rows.push(localRow);
@@ -2339,23 +2707,32 @@ function mergePrintRows(cloudRows){
 
 
 async function printAllA4(selectedUsers = null){
+    const ultimatePrintMode = localStorage.getItem("ultimateMode") === "true";
+
     try{
-        const response = await fetch(
-            APP_SCRIPT_URL +
-            "?date=" + encodeURIComponent(todayString()) +
-            "&all=true"
+        let cloudRows = [];
+
+        try{
+            const response = await fetch(
+                APP_SCRIPT_URL +
+                "?date=" + encodeURIComponent(todayString()) +
+                "&all=true"
+            );
+
+            cloudRows = await response.json();
+
+            if(cloudRows.status === "error"){
+                throw new Error(cloudRows.message || "Cloud loading failed.");
+            }
+        }catch(cloudError){
+            console.error("Unable to load all cloud rows:",cloudError);
+            setCloudStatus("offline");
+            cloudRows = [];
+        }
+
+        const rows = mergePrintRows(cloudRows).filter(row =>
+            String(row.date || "").trim() === todayString()
         );
-
-        const cloudRows = await response.json();
-
-if(cloudRows.status === "error"){
-    alert(cloudRows.message);
-    return;
-}
-
-const rows = mergePrintRows(cloudRows).filter(row =>
-    String(row.date || "") === todayString()
-);
 
         if(!Array.isArray(rows) || !rows.length){
             alert("No entries found.");
@@ -2398,11 +2775,50 @@ const rows = mergePrintRows(cloudRows).filter(row =>
             grouped[name].push(row);
         });
 
-        const html = Object.entries(grouped)
-    .map(([name,userRows]) =>
-        buildPrintablePage(userRows,name)
-    )
-    .join("");
+        let userGroups = Object.entries(grouped);
+
+        if(ultimatePrintMode){
+            for(let i = userGroups.length - 1; i > 0; i--){
+                const j = Math.floor(Math.random() * (i + 1));
+                [userGroups[i],userGroups[j]] = [userGroups[j],userGroups[i]];
+            }
+        }
+
+        const html = userGroups
+            .map(([name,userRows]) =>
+                buildPrintablePage(userRows,name,ultimatePrintMode)
+            )
+            .join("");
+
+        const printLayoutOverrides = ultimatePrintMode ? `
+.ultimatePrintTable{table-layout:fixed!important}
+.ultimatePrintTable th:first-child{width:5%!important}
+.ultimatePrintTable th:nth-child(2){width:29%!important}
+.ultimatePrintTable th:nth-child(3),
+.ultimatePrintTable th:nth-child(4),
+.ultimatePrintTable th:nth-child(5){width:14%!important}
+.ultimatePrintTable th:nth-child(6){width:24%!important}
+.ultimatePrintTable th,
+.ultimatePrintTable td{font-size:10px!important;white-space:normal!important}
+.ultimatePrintTable .activityCell{background:#fff!important;color:#111!important}
+.ultimatePrintTable .activityCell pre{white-space:pre-wrap!important}
+.ultimatePrintTable .activityTotalsCell{background:#eaf0f2!important;color:#111!important}
+.ultimatePrintTable .ultimateTimeCell{white-space:nowrap!important}
+.ultimatePrintTable .ultimateDetailsRow td{border-top:0!important}
+` : `
+@page{size:A4 portrait;margin:8mm;}
+.printFlow{
+    column-count:1!important;
+    column-gap:0!important;
+    column-rule:0!important;
+    column-fill:balance!important;
+    height:auto!important;
+}
+.a4Page{
+    break-inside:avoid-page!important;
+    page-break-inside:avoid!important;
+}
+`;
 
         const win = window.open("", "_blank");
 
@@ -2575,6 +2991,76 @@ td{
     background:#eaeaea!important;
 }
 
+.ultimatePrintTable{
+    table-layout:fixed!important;
+    font-size:10px!important;
+}
+
+.ultimatePrintTable th,
+.ultimatePrintTable td{
+    font-size:10px!important;
+    padding:5px!important;
+    white-space:normal!important;
+}
+
+.ultimatePrintTable th:first-child,
+.ultimatePrintTable tr.ultimateEntryRow td:first-child{
+    width:5%!important;
+}
+
+.ultimatePrintTable th:nth-child(2),
+.ultimatePrintTable tr.ultimateEntryRow td:nth-child(2){width:29%!important}
+.ultimatePrintTable th:nth-child(3),
+.ultimatePrintTable th:nth-child(4),
+.ultimatePrintTable th:nth-child(5),
+.ultimatePrintTable tr.ultimateEntryRow td:nth-child(3),
+.ultimatePrintTable tr.ultimateEntryRow td:nth-child(4),
+.ultimatePrintTable tr.ultimateEntryRow td:nth-child(5){width:14%!important}
+.ultimatePrintTable th:nth-child(6),
+.ultimatePrintTable tr.ultimateEntryRow td:nth-child(6){width:24%!important}
+.ultimatePrintTable .comboInfo{font-size:10px!important}
+.ultimatePrintTable .activityCell{background:#fff!important;color:#111!important}
+.ultimatePrintTable .activityTotalsCell{background:#eaf0f2!important;color:#111!important}
+.ultimatePrintTable .ultimateDetailsRow td{border-top:0!important}
+.ultimatePrintTable .ultimateTimeCell{white-space:nowrap!important}
+
+.ultimatePrintTable .entryDetailsRow td{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    font-size:10px;
+    line-height:1.35;
+    text-align:left;
+}
+
+.entryActivities{flex:1;min-width:0}
+.entryActivities pre{margin:2px 0 0;white-space:pre-wrap;font:inherit}
+.entryTime{white-space:nowrap}
+
+.metricTotal{
+    position:relative;
+    overflow:hidden;
+    min-width:55px;
+}
+.metricTotal::before{
+    position:absolute;
+    inset:50% auto auto 50%;
+    transform:translate(-50%,-50%);
+    z-index:0;
+    color:#526577;
+    opacity:.24;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:.04em;
+}
+.metricTotal b{position:relative;z-index:1}
+.tpuMetric::before{content:"TPU"}
+.oeplMetric::before{content:"OEPL"}
+.paeplMetric::before{content:"PAEPL"}
+.grandMetric::before{content:"TOTAL"}
+.ultimateActivityTotals td{font-size:10px!important}
+
 hr {
     display: none !important;
 }
@@ -2582,6 +3068,7 @@ hr {
 hr.user-tear-line {
     display: block !important;
 }
+${printLayoutOverrides}
 </style>
 </head>
 
@@ -2658,7 +3145,77 @@ function getReceiptActivityLines(breakup){
     return html;
 }
   
+function setUltimateLockIcon(unlocked){
+    const button = document.getElementById("ultimateLockBtn");
+    const shackle = unlocked
+        ? '<path d="M8 10V7a4 4 0 0 1 7.5-2M6 10h12v11H6zM12 14v3"/>'
+        : '<path d="M7 10V7a5 5 0 0 1 10 0v3M6 10h12v11H6zM12 14v3"/>';
+
+    button.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${shackle}</svg>`;
+    button.title = unlocked
+        ? "Return to Normal Calculator"
+        : "Unlock Ultimate Calculator";
+    button.setAttribute("aria-label",button.title);
+}
+
+function toggleUltimateMode(){
+    if(localStorage.getItem("ultimateMode") === "true"){
+        localStorage.setItem("ultimateMode","false");
+        document.body.classList.remove("ultimate-mode","ultimate-transform");
+        document.body.classList.toggle(
+            "dark",
+            localStorage.getItem("theme") === "dark"
+        );
+        document.querySelector(".hiText").textContent =
+            localStorage.getItem("theme") === "dark" ? "🌙 Hi," : "🌞 Hi,";
+        document.querySelector("h2").textContent = "SOB coMboS calculator";
+        document.title = "SOB coMboS calculator";
+        setUltimateLockIcon(false);
+        return;
+    }
+
+    openUltimateGate();
+}
+
+function openUltimateGate(){
+    document.getElementById("passwordModal").classList.add("show");
+    const passwordField = document.getElementById("ultimatePassword");
+    passwordField.value = "";
+    passwordField.focus();
+}
+
+function closeUltimateGate(){
+    document.getElementById("passwordModal").classList.remove("show");
+}
+
+function unlockUltimate(){
+    const password = document.getElementById("ultimatePassword").value.trim();
+
+    if(password.toLowerCase() !== "ms1"){
+        alert("Incorrect password.");
+        return;
+    }
+
+    closeUltimateGate();
+    localStorage.setItem("ultimateMode","true");
+    document.body.classList.remove("dark");
+    document.body.classList.add("ultimate-mode","ultimate-transform");
+    updateUltimateComboUi();
+    document.querySelector(".hiText").textContent = "";
+    document.querySelector("h2").textContent = "Ultimate Combo Calculator";
+    document.title = "Ultimate Combo Calculator";
+    setUltimateLockIcon(true);
+    setTimeout(() => document.body.classList.remove("ultimate-transform"),1400);
+}
+
+document.getElementById("ultimatePassword").addEventListener("keydown",event => {
+    if(event.key === "Enter") unlockUltimate();
+    if(event.key === "Escape") closeUltimateGate();
+});
+
 function toggleTheme(){
+    if(document.body.classList.contains("ultimate-mode")) return;
+
     const nextTheme = document.body.classList.contains("dark")
         ? "light"
         : "dark";
@@ -2959,9 +3516,20 @@ async function handleQrUpload(event){
     }
 }
 
+window.addEventListener("resize",() => {
+    if(document.body.classList.contains("ultimate-mode")){
+        updateUltimateComboUi();
+    }
+});
+
 document.addEventListener("click",event => {
     if(!event.target.closest(".print-all-wrap")){
         printMenu.classList.remove("show");
+    }
+
+    if(!event.target.closest(".comboControl")){
+        document.getElementById("ultimateComboMenu").classList.remove("show");
+        document.getElementById("ultimateComboToggle").setAttribute("aria-expanded","false");
     }
 });
 
@@ -2992,6 +3560,7 @@ function restoreFormState(){
 }
 
 setEditTimeOptions();
+updateUltimateComboUi();
 restoreFormState();
 
 const savedUsername =
@@ -3018,12 +3587,22 @@ usernameInput.addEventListener("change",() => {
 });
 
 const savedTheme = localStorage.getItem("theme");
+const ultimateUnlocked = localStorage.getItem("ultimateMode") === "true";
 
-document.body.classList.toggle("dark", savedTheme === "dark");
+document.body.classList.toggle("dark", !ultimateUnlocked && savedTheme === "dark");
 
-document.querySelector(".hiText").textContent =
-    savedTheme === "dark" ? "🌙 Hi," : "🌞 Hi,";
+document.querySelector(".hiText").textContent = ultimateUnlocked
+    ? ""
+    : savedTheme === "dark" ? "🌙 Hi," : "🌞 Hi,";
 
+if(ultimateUnlocked){
+    document.body.classList.add("ultimate-mode");
+    updateUltimateComboUi();
+    document.querySelector(".hiText").textContent = "";
+    document.querySelector("h2").textContent = "Ultimate Combo Calculator";
+    document.title = "Ultimate Combo Calculator";
+    setUltimateLockIcon(true);
+}
 
 loadUserLocalData();
 render();
