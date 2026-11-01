@@ -2310,6 +2310,63 @@ function render(){
         `${formatActivities(activities.paeplActivities)}`;
 }
 
+function printUltimateMyA5(rows,userName){
+    const win = window.open("", "_blank");
+
+    if(!win){
+        alert("Popup blocked. Please allow popups.");
+        return;
+    }
+
+    const sharedCss = [...document.querySelectorAll("style")]
+        .map(style => style.textContent)
+        .join("\n");
+    const report = buildPrintablePage(rows,userName,true);
+
+    win.document.open();
+    win.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My A4 Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+${sharedCss}
+@page{size:A4 landscape;margin:6mm;}
+html,body{margin:0!important;padding:0!important;width:100%!important;color:#000!important;background:#fff!important;font-family:'Arimo',sans-serif!important;overflow:visible!important}
+.printFlow{position:relative!important;display:block!important;direction:ltr!important;text-align:left!important;width:calc((100% - 8mm)/2)!important;height:auto!important;column-count:1!important;column-gap:0!important;column-rule:0!important;column-fill:auto!important;}
+.a4Page{display:block!important;width:100%!important;max-width:none!important;margin:0 0 8px!important;padding:0 0 4px!important;break-inside:avoid-page!important;page-break-inside:avoid!important;break-after:auto!important;page-break-after:auto!important}
+.header{display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;align-items:center!important;width:100%!important;margin-bottom:8px!important;font-size:10px!important;white-space:nowrap!important}
+.header-left{display:flex!important}.header-center{display:flex!important;justify-content:center!important;white-space:nowrap!important}.header-right{display:flex!important;justify-content:flex-end!important;white-space:nowrap!important}
+.headerLine{width:max-content!important;min-width:70px!important;max-width:none!important;white-space:nowrap!important}
+table{width:100%!important;min-width:0!important;border-collapse:collapse!important;font-size:9px!important;table-layout:auto!important}
+th,td{padding:3px!important;border:1px solid #000!important;color:#000!important;background:#fff!important;text-align:center!important;vertical-align:middle!important;white-space:normal!important}
+.ultimatePrintTable th,.ultimatePrintTable td{font-size:9px!important;padding:4px!important}
+.ultimatePrintTable .ultimateTicketInfo{display:grid;grid-template-columns:max-content minmax(0,1fr) max-content;align-items:center;width:100%;min-width:0;gap:4px;text-align:left}
+.ultimatePrintTable .ultimateSobId,.ultimatePrintTable .ultimatePax{white-space:nowrap}
+.ultimatePrintTable .ultimateTicketType{text-align:center;font-weight:normal;min-width:0}
+.ultimatePrintTable .ultimateEntryActivities{background:#fff!important;color:#111!important;font-size:8px!important;line-height:1.25!important;text-align:left!important;overflow-wrap:anywhere!important}
+.ultimatePrintTable .ultimateActivityGroup{display:inline-block;max-width:100%;vertical-align:top}
+.ultimatePrintTable .ultimateActivityTotalsCell{font-size:9px!important;background:#eaeaea!important;color:#111!important;text-align:left!important}
+.ultimatePrintTable .ultimateDetailsRow td{border-top:0!important}
+.ultimatePrintTable .ultimateTimeCell{white-space:nowrap!important}
+.ultimateGrandTotals td,.ultimateActivityTotals td{font-size:9px!important}
+.clockIcon{display:inline-block;width:11px;height:11px;margin-right:2px;vertical-align:-2px;fill:none;stroke:#222;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.user-tear-line{display:block!important;margin:8px 0!important;border:0!important;border-top:1px dashed #777!important;height:0!important}
+tr{break-inside:avoid!important;page-break-inside:avoid!important}
+</style>
+</head>
+<body><div class="printFlow">${report}</div></body>
+</html>`);
+    win.document.close();
+
+    setTimeout(() => {
+        win.focus();
+        win.print();
+    },500);
+}
+
 async function printA4(){
     const username = usernameInput.value.trim();
 
@@ -2406,6 +2463,18 @@ async function printA4(){
     );
 
     render();
+
+    if(localStorage.getItem("ultimateMode") === "true"){
+        const myRows = data.filter(row =>
+            String(row.displayName || "").trim().toLowerCase() ===
+            username.toLowerCase()
+        );
+
+        data = originalData;
+        render();
+        printUltimateMyA5(myRows,username);
+        return;
+    }
 
     const restoreData = () => {
         data = originalData;
@@ -2711,7 +2780,7 @@ function buildPrintablePage(rows,userName,ultimatePrintMode = false){
             <tbody>${htmlRows}</tbody>
             <tfoot>${totals}</tfoot>
         </table>
-        ${ultimatePrintMode ? "" : '<hr class="user-tear-line"><hr style="border:1px dashed #999;margin:12px 0">'}
+        <hr class="user-tear-line">${ultimatePrintMode ? "" : '<hr style="border:1px dashed #999;margin:12px 0">'}
     </div>`;
 }
 
@@ -2821,14 +2890,10 @@ async function printAllA4(selectedUsers = null){
             grouped[name].push(row);
         });
 
-        let userGroups = Object.entries(grouped);
-
-        if(ultimatePrintMode){
-            for(let i = userGroups.length - 1; i > 0; i--){
-                const j = Math.floor(Math.random() * (i + 1));
-                [userGroups[i],userGroups[j]] = [userGroups[j],userGroups[i]];
-            }
-        }
+        // Place the largest reports first to reduce unused column space.
+        let userGroups = Object.entries(grouped).sort((a,b) =>
+            b[1].length - a[1].length || a[0].localeCompare(b[0])
+        );
 
         const html = userGroups
             .map(([name,userRows]) =>
@@ -2837,6 +2902,31 @@ async function printAllA4(selectedUsers = null){
             .join("");
 
         const printLayoutOverrides = ultimatePrintMode ? `
+@page{size:A4 landscape;margin:6mm;}
+.printFlow{
+    position:relative!important;
+    display:block!important;
+    direction:ltr!important;
+    text-align:left!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    column-count:2!important;
+    column-gap:8mm!important;
+    column-rule:0!important;
+    column-fill:balance!important;
+}
+    .printFlow .a4Page{
+    display:block!important;
+    width:100%!important;
+    margin:0 0 8px!important;
+    padding:0 0 4px!important;
+    break-inside:avoid-column!important;
+    page-break-inside:avoid!important;
+    break-after:auto!important;
+    page-break-after:auto!important;
+}
 .ultimatePrintTable{table-layout:auto!important}
 .ultimatePrintTable th,
 .ultimatePrintTable td{font-size:10px!important;white-space:normal!important}
@@ -2902,39 +2992,28 @@ body{
     font-family:'Arimo',sans-serif!important;
     overflow:visible!important;
 }
-/* Two A5-width columns on A4 landscape, divided at page center */
+/* Ultimate mode flows reports through the left and right A5 columns. */
 .printFlow {
     position: relative;
+    direction: ltr;
+    text-align: left;
     column-count: 2;
     column-gap: 8mm;
     column-rule: none;
-    column-fill: auto;
-    height: 198mm;
+    column-fill: balance;
     box-sizing: border-box;
     width: 100%;
 }
-.printFlow::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    border-left: 1px dashed #777;
-    pointer-events: none;
-}
 
-/* Keep each user's report together when it fits in one A5 half */
 .printFlow .a4Page {
-    display: inline-block;
+    display: block;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-    margin: 0 0 10px !important;
+    margin: 0 0 8px !important;
     padding: 0 0 4px !important;
-
-    -webkit-column-break-inside: avoid;
-    break-inside: avoid-column;
-    page-break-inside: avoid;
+    break-inside: auto;
+    page-break-inside: auto;
 }
 
 /* Preserve the original table's columns and formatting */
